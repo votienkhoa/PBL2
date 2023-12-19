@@ -15,3 +15,8 @@ void StudentManagement::Add_Student(Student* x){
 void StudentManagement::Display_Student(){
     Students_Display(this->Student_List);
 }
+
+StudentManagement* StudentManagement::ReturnUniqueObject(){
+    static StudentManagement x;
+    return &x;
+}

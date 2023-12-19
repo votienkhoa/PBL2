@@ -1,8 +1,10 @@
-#include"Student.h"
+#include"StudentManagement.h"
+#include"Teacher.h"
+#include"ANSI.h"
 // #include"StudentAction.cpp"
 using namespace std;
 
-class UserFunction;
+class StudentManagement;
 class UserManagement;
 
 class User{
@@ -26,15 +28,18 @@ class NormalUser : public User{
         NormalUser(string = "NULL", string = "NULL", Student* = nullptr);
         void UserAction();
         friend class UserManagement;
-        friend class UserFunction;
 };
 
 class AdminUser : public User{
     private:
-        Student* data; //se la class teacher
+        Teacher* data; //se la class teacher
     public:
-        AdminUser(string = "NULL", string = "NULL", Student* = nullptr);
+        AdminUser(string = "NULL", string = "NULL", Teacher* = nullptr);
         void UserAction();
+};
+
+class TOAA : public User{ //Quan tri tat ca moi thu
+
 };
 
 void Action(User*);

@@ -1,7 +1,4 @@
 #include"Student.h"
-#include<iostream>
-#include<vector>
-#include<iomanip>
 using namespace std;
 
 void Student::Birthday_Conv(){
@@ -50,7 +47,7 @@ Student* Stu_Create(){
 
     
 }
-void Student::Stu_Display(){
+void Student::Stu_Display1(){
     cout << "1.Ho va ten: " << Stu_Name << endl;
     cout << "2.MSSV: " << Stu_ID << endl;
     //--------------------------------
@@ -64,12 +61,22 @@ void Student::Stu_Display(){
     cout << "6.Lop: " << Stu_Class << endl;
 }
 
+void Student::Stu_Display2(){
+    cout << setw(25) << left << Stu_Name;
+    cout << setw(15) << left << Stu_ID ;
+    cout << setw(15) << left << (Stu_Sex ? "Nam" : "Nu");
+    cout << setw(15) << left << Stu_BD ;
+    cout << setw(15) << left << Stu_Class;
+    cout << setw(30) << left << Stu_Address ;
+    cout << endl;
+}
+
 void Student::Stu_Edit(){
     while(1){
         int choice;
         system("cls");
         cout << "Hay kiem tra va chon thong tin can sua!" << endl;
-        Stu_Display();
+        Stu_Display1();
         cout << "7.Tro ve" << endl;
         cout << "Lua chon: "; cin >> choice;
         fflush(stdin);
@@ -141,7 +148,6 @@ void Student::Stu_Edit(){
 
 
 void Students_Display(vector<Student*> v){
-    cout << endl;
     cout << setw(25) << left << "Ten" ;
     cout << setw(15) << left << "MSSV" ;
     cout << setw(15) << left << "Gioi tinh"; 
@@ -150,13 +156,7 @@ void Students_Display(vector<Student*> v){
     cout << setw(30) << left << "Dia chi" ;
     cout << endl;
     for (auto x : v){
-        cout << setw(25) << left << x->Stu_Name;
-        cout << setw(15) << left << x->Stu_ID ;
-        cout << setw(15) << left << (x->Stu_Sex ? "Nam" : "Nu");
-        cout << setw(15) << left << x->Stu_BD ;
-        cout << setw(15) << left << x->Stu_Class;
-        cout << setw(30) << left << x->Stu_Address ;
-        cout << endl;
+        x->Stu_Display2();
     }
 }
 

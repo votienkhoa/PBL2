@@ -1,5 +1,6 @@
 #include"Student.h"
 
+
 using namespace std;
 
 class StudentManagement{
@@ -10,4 +11,5 @@ class StudentManagement{
         ~StudentManagement();
         void Add_Student(Student*);
         void Display_Student();
+        static StudentManagement* ReturnUniqueObject();
 };

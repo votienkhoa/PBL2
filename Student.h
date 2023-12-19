@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 #include<vector>
 #include<iomanip>
@@ -15,7 +16,8 @@ class Student{
     public:
         Student(string = "NULL", string = "NULL", bool = 0, string = "NULL", string = "NULL", string = "NULL");
         ~Student();
-        void Stu_Display();
+        void Stu_Display1();
+        void Stu_Display2();
         void Stu_Edit();
         void Birthday_Conv();
         friend class StudentManagement;
