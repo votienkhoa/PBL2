@@ -1,7 +1,6 @@
+#pragma once
 #include"Student.h"
 
-
-using namespace std;
 
 class StudentManagement{
     private:
@@ -9,7 +8,7 @@ class StudentManagement{
     public:
         StudentManagement();
         ~StudentManagement();
+        vector<Student*> getStudent_List();
         void Add_Student(Student*);
-        void Display_Student();
         static StudentManagement* ReturnUniqueObject();
 };

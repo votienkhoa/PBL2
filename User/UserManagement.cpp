@@ -1,4 +1,6 @@
+#pragma once
 #include"UserManagement.h"
+#include"../Public/PublicFunction.h"
 
 UserManagement::UserManagement(){
 
@@ -6,12 +8,22 @@ UserManagement::UserManagement(){
 UserManagement::~UserManagement(){
     cout << "HuyUserMana" << endl;
 }
+//-----------------------------------------------------------
+UserManagement* UserManagement::ReturnUniqueObject(){
+    static UserManagement x;
+    return &x;
+}
+//---------------------------------------------------------------
 void UserManagement::Add_User(User* x){
     users.push_back(x);
 }
-
-void UserManagement::Register(){
-    NormalUser* tmp = new NormalUser;
+//---------------------------------------------------------------
+void UserManagement::Register(int role){
+    if (role == 1)  cout << CYN << "Tao tai khoan Sinh Vien" << RESET << endl;
+    else if (role == 2) cout << CYN << "Tao tai khoan Giao Vien" << RESET << endl;
+    else cout << CYN << "Tao tai khoan Quan Tri Vien" << RESET << endl;
+    //--------
+    User* tmp;
     string a,b,c;
     while(1){
         cout << "Nhap ten nguoi dung cua ban: ";
@@ -23,10 +35,7 @@ void UserManagement::Register(){
                 break;
             }
         }
-        if (Name_check){
-            tmp->username = a;
-            break;
-        }
+        if (Name_check) break;
         else{
             system("cls");
             cout << RED <<"Ten nguoi dung da ton tai, vui long chon ten khac!" << RESET << endl;
@@ -43,18 +52,30 @@ void UserManagement::Register(){
             cout << RED << "Mat khau khong trung khop, vui long thu lai!" << RESET << endl;
             cout << "Ten nguoi dung: " << a << endl;
         } 
-        else{
-            tmp->password = b;
-            break;
-        }
+        else break;
     }
     system("cls");
-    Student* tmpstu = Stu_Create();
-    tmp->data = tmpstu;
+    // Student* tmpstu = Stu_Create();
+    // tmp->data = tmpstu;
+    // users.push_back(tmp);
+
+    if (role == 1){
+        Student* tmpdata = Stu_Create();
+        tmp = new NormalUser(a,b,tmpdata);
+    }
+    else if (role == 2){
+        Teacher* tmpdata = Tch_Create();
+        tmp = new TeacherUser(a,b,tmpdata);
+    }
+    else{
+        Teacher* tmpdata = Tch_Create();
+        tmp = new AdminUser(a,b,tmpdata);
+    }
     users.push_back(tmp);
     cout << GRN << "Khoi tao tai khoan thanh cong!" << RESET << endl;
-}
 
+}
+//-------------------------------------------------------------------------
 void UserManagement::Login(){
     string a,b;
     User* current_user;
@@ -77,15 +98,16 @@ void UserManagement::Login(){
     }
     cout << GRN << "Dang nhap thanh cong" << RESET << endl;
     if (current_user->role == 1) cout << CYN << "Quyen tai khoan cua ban la Hoc Sinh" << RESET << endl;
+    else if (current_user->role == 2) cout << CYN << "Quyen tai khoan cua ban la Giao Vien" << RESET << endl;
     else cout << CYN << "Quyen tai khoan cua ban la Quan Tri Vien" << RESET << endl;
     system("pause");
 
-    Action(current_user);
+    current_user->UserAction();
     // NormalUserAction(current_user);
 
 }
 
-
+//----------------------------------------------------------------------
 void UserManagement::Show_Users(){
     for (auto x : this->users){ 
         cout << x->username << endl;

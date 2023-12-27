@@ -8,12 +8,12 @@ StudentManagement::~StudentManagement(){
     
 }
 
-void StudentManagement::Add_Student(Student* x){
-    this->Student_List.push_back(x);
+vector<Student*> StudentManagement::getStudent_List(){
+    return Student_List;
 }
 
-void StudentManagement::Display_Student(){
-    Students_Display(this->Student_List);
+void StudentManagement::Add_Student(Student* x){
+    this->Student_List.push_back(x);
 }
 
 StudentManagement* StudentManagement::ReturnUniqueObject(){

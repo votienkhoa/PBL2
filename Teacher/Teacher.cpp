@@ -13,7 +13,7 @@ void Teacher::Birthday_Conv(){
 Teacher::Teacher(string a, string b, bool c, string d, string e)
     : Tch_Name(a), Tch_ID(b), Tch_Sex(c), Tch_BD(d), Tch_Address(e)
 {
-
+    Birthday_Conv();
 }
 
 Teacher::~Teacher(){
@@ -32,19 +32,27 @@ void Teacher::Tch_Display(){
     cout << "5.Dia chi: " << Tch_Address << endl;
     //------------------------------
 }
+void Teacher::Tch_Display2(){
+    cout << setw(25) << left << Tch_Name;
+    cout << setw(15) << left << Tch_ID ;
+    cout << setw(15) << left << (Tch_Sex ? "Nam" : "Nu");
+    cout << setw(15) << left << Tch_BD;
+    cout << setw(30) << left << Tch_Address ;
+    cout << endl;
+}
 
 void Teacher::Tch_Edit(){
     while(1){
-        int choice;
         system("cls");
         cout << "Hay kiem tra va chon thong tin can sua!" << endl;
         Tch_Display();
         cout << "6.Tro ve" << endl;
-        cout << "Lua chon: "; cin >> choice;
+        cout << "Lua chon: ";   char c = _getch();
         fflush(stdin);
         system("cls");
         bool breaker = false;
         
+        int choice = c - '0';
         switch(choice){
             case 1:
             {
@@ -98,3 +106,5 @@ void Teacher::Tch_Edit(){
 
     }
 }
+//-------------------------------------
+

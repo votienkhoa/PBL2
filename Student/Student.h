@@ -2,7 +2,11 @@
 #include<iostream>
 #include<vector>
 #include<iomanip>
+#include<conio.h>
 using namespace std;
+
+class StudentManagement;
+
 
 class Student{
     private:
@@ -21,9 +25,10 @@ class Student{
         void Stu_Edit();
         void Birthday_Conv();
         friend class StudentManagement;
-        friend void Students_Display(vector<Student*>);
+        friend class UserManagement;
+        // friend void Students_Display(vector<Student*>);
 };
-Student* Stu_Create();
+
 
 
 

@@ -1,14 +1,15 @@
-#include"StudentManagement.h"
-#include"Teacher.h"
-#include"ANSI.h"
-// #include"StudentAction.cpp"
+#pragma once
+// #include"UserManagement.h"
+#include"../Student/StudentManagement.h"
+#include"../Teacher/TeacherManagement.h"
+#include"../Public/PublicFunction.h"
+#include"../ANSI.h"
 using namespace std;
 
-class StudentManagement;
-class UserManagement;
+// class StudentManagement;
 
 class User{
-    private:
+    protected:
         string username;
         string password;
         int role;
@@ -30,16 +31,20 @@ class NormalUser : public User{
         friend class UserManagement;
 };
 
-class AdminUser : public User{
+class TeacherUser : public User{
     private:
         Teacher* data; //se la class teacher
     public:
-        AdminUser(string = "NULL", string = "NULL", Teacher* = nullptr);
+        TeacherUser(string = "NULL", string = "NULL", Teacher* = nullptr);
+        void TeacherReg();
         void UserAction();
 };
 
-class TOAA : public User{ //Quan tri tat ca moi thu
-
+class AdminUser : public User{ //Quan tri tat ca moi thu
+    private:
+        Teacher* data;
+    public:
+        AdminUser(string = "NULL", string = "NULL", Teacher* = nullptr);
+        void TeacherReg();
+        void UserAction();
 };
-
-void Action(User*);

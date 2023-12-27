@@ -1,6 +1,7 @@
 #include"Student.h"
 using namespace std;
 
+
 void Student::Birthday_Conv(){
     string res;
     string s = this->Stu_BD;
@@ -15,38 +16,13 @@ void Student::Birthday_Conv(){
 Student::Student(string a, string b, bool c, string d, string e, string f )
  : Stu_Name(a), Stu_ID(b), Stu_Sex(c), Stu_BD(d), Stu_Address(e), Stu_Class(f)
 {
-    this->Birthday_Conv();
+    Birthday_Conv();
 }
 Student::~Student(){
     
 }
 
-
-
-Student* Stu_Create(){
-    string a,b,c1,d,e,f;
-    bool c2;
-    cout << "Hay nhap thong tin ca nhan!" << endl;
-    cout << "Ho va ten: "; 
-    fflush(stdin);  getline(cin, a);
-    cout << "MSSV: "; cin >> b;
-    cout << "Gioi tinh: " << endl;
-    cout << "1.Nu" << endl << "2.Nam" << endl;
-    cout << "Lua chon cua ban: "; cin >> c1;
-    c2 = stoi(c1) - 1;
-    cout << "Ngay sinh: "; cin >> d;
-    cout << "Dia chi: "; 
-    fflush(stdin); getline(cin, e);
-    cout << "Lop cua ban: "; cin >> f;
-    Student* tmp = new Student(a,b,c2,d,e,f);
-
-    tmp->Stu_Edit();
-
-    //----------------
-    return tmp;
-
-    
-}
+//----------------------------------------------------
 void Student::Stu_Display1(){
     cout << "1.Ho va ten: " << Stu_Name << endl;
     cout << "2.MSSV: " << Stu_ID << endl;
@@ -145,20 +121,6 @@ void Student::Stu_Edit(){
     }
 }
 
-
-
-void Students_Display(vector<Student*> v){
-    cout << setw(25) << left << "Ten" ;
-    cout << setw(15) << left << "MSSV" ;
-    cout << setw(15) << left << "Gioi tinh"; 
-    cout << setw(15) << left << "Ngay sinh" ;
-    cout << setw(15) << left << "Lop";
-    cout << setw(30) << left << "Dia chi" ;
-    cout << endl;
-    for (auto x : v){
-        x->Stu_Display2();
-    }
-}
 
 
 

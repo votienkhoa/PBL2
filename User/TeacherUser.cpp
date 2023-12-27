@@ -1,23 +1,23 @@
 #include"User.h"
 
-AdminUser::AdminUser(string a, string b, Teacher* p) //thay bang Teacher
+TeacherUser::TeacherUser(string a, string b, Teacher* p) //thay bang Teacher
     : User(a,b,2), data(p)
 {
 
 }
 
-void AdminUser::UserAction(){
+void TeacherUser::UserAction(){
     while(1){
         bool Logout = false;
         system("cls");
         cout << "1. Xem thong tin ca nhan" << endl;
         cout << "2. Chinh sua thong tin ca nhan" << endl;
         cout << "3. Xem danh sach sinh vien toan truong" << endl;
-        cout << "4. Xem ket qua hoc tap" << endl;
         cout << "5. Doi mat khau" << endl;
         cout << "6. Dang xuat" << endl;
 
-        int choice; cin >> choice;
+        char c = _getch();
+        int choice = c - '0';
         system("cls");
         switch (choice)
         {
@@ -34,8 +34,7 @@ void AdminUser::UserAction(){
             }
             case 3:
             {
-                StudentManagement* tmp = StudentManagement::ReturnUniqueObject();
-                tmp->Display_Student();
+                Students_Display(StudentManagement::ReturnUniqueObject()->getStudent_List());
             }
             case 4:
             {
