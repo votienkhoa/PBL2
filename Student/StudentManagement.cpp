@@ -1,4 +1,5 @@
 #include"StudentManagement.h"
+#include<algorithm>
 
 StudentManagement::StudentManagement(){
 
@@ -13,7 +14,7 @@ vector<Student*> StudentManagement::getStudent_List(){
 }
 
 void StudentManagement::Add_Student(Student* x){
-    this->Student_List.push_back(x);
+    Student_List.insert(lower_bound(Student_List.begin(), Student_List.end(), x, Student::Stu_Cmp), x);
 }
 
 StudentManagement* StudentManagement::ReturnUniqueObject(){

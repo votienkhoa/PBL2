@@ -1,16 +1,15 @@
+#pragma once
 #include"Class.h"
-#include<vector>
-using namespace std;
 
 class ClassManagement{
     private:
         vector<Class*> Class_List;
+        ClassManagement();
     public:
+        ~ClassManagement();
+        vector<Class*> getClass_List(); 
         void Classes_Display();
         void Add_Class(Class*);
-        void Delete_Class(Class*);
-
-        
-
+        static ClassManagement* ReturnUniqueObject();
 
 };

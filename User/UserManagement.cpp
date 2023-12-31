@@ -13,9 +13,17 @@ UserManagement* UserManagement::ReturnUniqueObject(){
     static UserManagement x;
     return &x;
 }
+
+vector<User*>& UserManagement::getUsers(){
+    return users;
+}
 //---------------------------------------------------------------
 void UserManagement::Add_User(User* x){
     users.push_back(x);
+}
+
+void UserManagement::Delete_User(User* x){
+    
 }
 //---------------------------------------------------------------
 void UserManagement::Register(int role){
@@ -77,6 +85,7 @@ void UserManagement::Register(int role){
 }
 //-------------------------------------------------------------------------
 void UserManagement::Login(){
+    system("cls");
     string a,b;
     User* current_user;
     int check;

@@ -2,6 +2,8 @@
 // #include"UserManagement.h"
 #include"../Student/StudentManagement.h"
 #include"../Teacher/TeacherManagement.h"
+#include"../Class/ClassManagement.h"
+#include"../Course/CourseManagement.h"
 #include"../Public/PublicFunction.h"
 #include"../ANSI.h"
 using namespace std;
@@ -27,8 +29,9 @@ class NormalUser : public User{
         Student* data;
     public:
         NormalUser(string = "NULL", string = "NULL", Student* = nullptr);
+        Student* getData();
         void UserAction();
-        friend class UserManagement;
+        friend class AdminUser;
 };
 
 class TeacherUser : public User{
@@ -36,7 +39,6 @@ class TeacherUser : public User{
         Teacher* data; //se la class teacher
     public:
         TeacherUser(string = "NULL", string = "NULL", Teacher* = nullptr);
-        void TeacherReg();
         void UserAction();
 };
 
@@ -45,6 +47,6 @@ class AdminUser : public User{ //Quan tri tat ca moi thu
         Teacher* data;
     public:
         AdminUser(string = "NULL", string = "NULL", Teacher* = nullptr);
-        void TeacherReg();
         void UserAction();
+        void Action_to_Stu(NormalUser*);
 };

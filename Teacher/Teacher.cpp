@@ -1,4 +1,6 @@
 #include"Teacher.h"
+#include"../Class/Class.h"
+#include"../Course/Course.h"
 void Teacher::Birthday_Conv(){
     string res;
     string s = Tch_BD;
@@ -10,8 +12,8 @@ void Teacher::Birthday_Conv(){
     Tch_BD= res;
 }
 
-Teacher::Teacher(string a, string b, bool c, string d, string e)
-    : Tch_Name(a), Tch_ID(b), Tch_Sex(c), Tch_BD(d), Tch_Address(e)
+Teacher::Teacher(string a, string b, bool c, string d, string e, Class* f)
+    : Tch_Name(a), Tch_ID(b), Tch_Sex(c), Tch_BD(d), Tch_Address(e), Tch_Class(f)
 {
     Birthday_Conv();
 }
@@ -19,6 +21,19 @@ Teacher::Teacher(string a, string b, bool c, string d, string e)
 Teacher::~Teacher(){
 
 }
+//------------------------------------------------
+string Teacher::getName(){
+    return Tch_Name;
+}
+
+Class* Teacher::getClass(){
+    return Tch_Class;
+}
+
+void Teacher::setClass(Class* x){
+    Tch_Class = x;
+}
+//----------------------------------------------
 
 void Teacher::Tch_Display(){
     cout << "1.Ho va ten: " << Tch_Name << endl;
@@ -31,6 +46,7 @@ void Teacher::Tch_Display(){
     //-------------------------------
     cout << "5.Dia chi: " << Tch_Address << endl;
     //------------------------------
+    // cout << "6.Lop chu nhiem: " << Tch_Class->getName() << endl;
 }
 void Teacher::Tch_Display2(){
     cout << setw(25) << left << Tch_Name;
@@ -38,7 +54,14 @@ void Teacher::Tch_Display2(){
     cout << setw(15) << left << (Tch_Sex ? "Nam" : "Nu");
     cout << setw(15) << left << Tch_BD;
     cout << setw(30) << left << Tch_Address ;
+    cout << setw(15) << left << (Tch_Class == nullptr ? "Chua co lop" : Tch_Class->getName());
     cout << endl;
+}
+
+void Teacher::Courses_Display(){
+    for (auto x : Tch_Courses){
+        cout << x->getName() << endl;
+    }
 }
 
 void Teacher::Tch_Edit(){

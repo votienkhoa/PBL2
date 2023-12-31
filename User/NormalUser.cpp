@@ -3,7 +3,11 @@
 NormalUser::NormalUser(string a, string b, Student* p)
     : User(a,b,1), data(p)
 {
+    p->setAccount(this);
+}
 
+Student* NormalUser::getData(){
+    return data;
 }
 
 void NormalUser::UserAction(){
@@ -12,8 +16,8 @@ void NormalUser::UserAction(){
         system("cls");
         cout << "1. Xem thong tin ca nhan" << endl;
         cout << "2. Chinh sua thong tin ca nhan" << endl;
-        cout << "3. Xem cac lop hoc phan" << endl;
-        cout << "4. Xem ket qua hoc tap" << endl;
+        cout << "3. Xem cac lop hoc phan va ket qua hoc tap" << endl;
+        cout << "4. Xem danh sach lop hien tai" << endl;
         cout << "5. Doi mat khau" << endl;
         cout << "6. Dang xuat" << endl;
 
@@ -34,13 +38,13 @@ void NormalUser::UserAction(){
             }
             case 3:
             {
-                cout << "Chua code xong dung co bam vo nua" << endl;
+                this->data->Courses_Display();
                 system("pause");
                 break;
             }
             case 4:
             {
-                cout << "Chua code xong dung co bam vo nua" << endl;
+                this->data->Class_Students_List();
                 system("pause");
                 break;
             }
