@@ -11,4 +11,5 @@ class TeacherManagement{
         void Add_Teacher(Teacher*);
         static TeacherManagement* ReturnUniqueObject();
 
+        friend class Teacher;
 };

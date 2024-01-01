@@ -12,7 +12,7 @@ vector<Teacher*> TeacherManagement::getTeacher_List(){
 }
 //-------------------------------------------
 void TeacherManagement::Add_Teacher(Teacher* x){
-    Teacher_List.push_back(x);
+    Teacher_List.insert(lower_bound(Teacher_List.begin(), Teacher_List.end(), x, Teacher::Tch_Cmp), x);
 }
 //---------------------------------------
 TeacherManagement* TeacherManagement::ReturnUniqueObject(){

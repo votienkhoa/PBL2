@@ -86,7 +86,8 @@ void Student::Courses_Display(){
 }
 
 void Student::Class_Students_List(){
-    Stu_Class->Show_Student();
+    if (Stu_Class) Stu_Class->Show_Student();
+    else cout << RED << "Hoc sinh nay hien chua co lop!" << RESET << endl;
 }
 
 void Student::Stu_Edit(){
@@ -162,11 +163,10 @@ void Student::Stu_Edit(){
 
     }
 }
-// bool Student::Stu_cmp(const Student* a, const Student* b){
-//     return (a->getID() < b->getID());
-// }
+
+
 bool Student::Stu_Cmp(const Student* a, const Student* b){
-    return a->getID() < b->getID();
+    return a->Stu_ID < b->Stu_ID;
 }
 
 void Student::Stu_Delete(){
@@ -174,7 +174,7 @@ void Student::Stu_Delete(){
     auto clsptr = &this->Stu_Class->Cls_List;
     clsptr->erase(lower_bound(clsptr->begin(), clsptr->end(),this, Student::Stu_Cmp));
     
-    //xoa trong usmng
+    //xoa trong stumng
     auto mnptr = &StudentManagement::ReturnUniqueObject()->Student_List;
     mnptr->erase(lower_bound(mnptr->begin(), mnptr->end(),this, Student::Stu_Cmp));
 
@@ -194,7 +194,7 @@ void Student::Stu_Delete(){
         cur_index++;
     }
     // cout << rm_index << " " << usptr->getUsers().size() << endl;
-    usptr->getUsers().erase(usptr->getUsers().begin());
+    usptr->getUsers().erase(usptr->getUsers().begin() + rm_index);
     delete rm_us;
 
 

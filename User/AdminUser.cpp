@@ -68,7 +68,7 @@ void AdminUser::Action_to_Stu(NormalUser* x){
                 char c = _getch();
                 int choice = c - '0';
                 if (choice == 1){
-                    x->data->Stu_Delete(); 
+                    x->data->Stu_Delete();
                     return;
                 }
 
@@ -123,9 +123,8 @@ void AdminUser::Action_to_Teacher(TeacherUser* x){
             }
             case 4:
             {
-                cout << "Chua code cai nay" << endl;
-                system("pause");
-                break;
+                x->data->Tch_Delete();
+                return;
             }
             case 5:
             {
@@ -283,7 +282,8 @@ void AdminUser::UserAction(){
                     else if (choice == 2){
                         while(1){
                             Teacher* tmp = Teacher_Select(TeacherManagement::ReturnUniqueObject()->getTeacher_List(),0);
-                            if (tmp->getRealAccount() == 1) Action_to_Teacher(tmp->getAccount1());
+                            if (tmp == nullptr) break;
+                            else if (tmp->getRealAccount() == 1) Action_to_Teacher(tmp->getAccount1());
                             else Action_to_Admin(tmp->getAccount2());
                         }
                     }

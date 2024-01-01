@@ -1,7 +1,7 @@
 #include"Teacher.h"
 #include"../Class/Class.h"
 #include"../Course/Course.h"
-#include"../User/User.h"
+#include"../User/UserManagement.h"
 void Teacher::Birthday_Conv(){
     string res;
     string s = Tch_BD;
@@ -153,4 +153,50 @@ void Teacher::Tch_Edit(){
     }
 }
 //-------------------------------------
+bool Teacher::Tch_Cmp(const Teacher* a, const Teacher* b){
+    return a->Tch_ID < b->Tch_ID;
+}
+
+void Teacher::Tch_Delete(){
+    //xoa trong mana
+    auto mnptr = &TeacherManagement::ReturnUniqueObject()->Teacher_List;
+    mnptr->erase(lower_bound(mnptr->begin(), mnptr->end(), this, Tch_Cmp));
+
+    //xoa trong user
+    int current_index = 0, rm_index;
+
+    auto usptr = UserManagement::ReturnUniqueObject();
+    for (auto x : usptr->getUsers()){
+        if (TeacherUser* tmp = dynamic_cast<TeacherUser*>(x)){
+            if (tmp->getData() == this){
+                rm_index = current_index;
+                break;
+            }
+        }
+        else if (AdminUser* tmp = dynamic_cast<AdminUser*>(x)){
+            if (tmp->getData() == this){
+                rm_index = current_index;
+                break;
+            }
+        }
+
+
+        current_index++;
+    }
+    usptr->getUsers().erase(usptr->getUsers().begin() + rm_index);
+
+    if (Tch_Account1) delete Tch_Account1;
+    else delete Tch_Account2;
+
+    //xoa lop
+    Tch_Class->Cls_Delete();
+    // delete Tch_Class;
+
+    //xoa loi hoc phan
+    for (auto x : Tch_Courses){
+        x->Course_Delete();
+    }
+
+}
+
 

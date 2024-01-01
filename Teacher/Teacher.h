@@ -7,6 +7,7 @@
 using namespace std;
 
 class StudentManagement;
+class TeacherManagement;
 class Class;
 class Course;
 class User;
@@ -38,8 +39,11 @@ class Teacher{
         void Tch_Display1();
         void Tch_Display2();
         void Tch_Edit();
+        void Tch_Delete();
         void Birthday_Conv();
+        static bool Tch_Cmp(const Teacher*, const Teacher*);
         friend Course;
+        friend TeacherManagement;
         // void Call_StudentManagement(StudentManagement*);
         // friend class TeacherManagement;
 };

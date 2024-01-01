@@ -3,7 +3,7 @@
 Course::Course(string a, Teacher* b)
     : Crs_Name(a), Crs_Teacher(b)
 {
-    b->Tch_Courses.push_back(this);
+    b->Tch_Courses.insert(lower_bound(b->Tch_Courses.begin(), b->Tch_Courses.end(), this, Crs_Cmp), this);
 }
 Course::~Course(){
 
@@ -31,7 +31,7 @@ double Course::getCK(Student* x){
 void Course::Add_Student(Student* x){
     Result tmp;
     Res_List[x] = tmp;
-    x->Stu_Courses.push_back(this);
+    x->Stu_Courses.insert(lower_bound( x->Stu_Courses.begin(),  x->Stu_Courses.end(), this, Crs_Cmp), this);
 }
 
 void Course::Set_Result(Student* x){
@@ -104,5 +104,19 @@ void Course::Show_Student(){
         cout << setw(10) << left << x.second.GK;
         cout << setw(10) << left << x.second.CK;
         cout << endl;
+    }
+}
+//-----------------------------------------------
+bool Course::Crs_Cmp(const Course* a, const Course* b){
+    return a->Crs_Name < b->Crs_Name;
+}
+
+void Course::Course_Delete(){
+    auto crsptr = &CourseManagement::ReturnUniqueObject()->Course_List;
+    crsptr->erase(lower_bound(crsptr->begin(), crsptr->end(), this, Crs_Cmp));
+
+    for (auto x : Res_List){
+        auto tmp = &x.first->Stu_Courses;
+        tmp->erase(lower_bound(tmp->begin(), tmp->end(), this, Crs_Cmp));
     }
 }

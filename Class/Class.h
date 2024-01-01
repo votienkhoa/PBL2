@@ -19,6 +19,8 @@ class Class{
         vector<Student*> getCls_List();
         void Add_Student(Student*);
         void Show_Student();
+        void Cls_Delete();
+        static bool Cls_Cmp(const Class*, const Class*);
         friend ClassManagement;
         friend Student;
 };

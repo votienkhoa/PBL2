@@ -108,6 +108,7 @@ Student* Student_Select(const vector<Student*> &v){
 
 Teacher* Teacher_Select(const vector<Teacher*> &v, bool status){
     int wrin = 0;
+    string schoice;
     int choice;
     while(1){
         Teachers_Display(v);
@@ -115,7 +116,11 @@ Teacher* Teacher_Select(const vector<Teacher*> &v, bool status){
         cout << endl;
         if (wrin == 1) cout << RED << "Lua chon khong hop le, vui long nhap lai!" <<  RESET << endl;
         else if (wrin == 2) cout << RED << "Giao vien nay da co lop chu nhiem, vui long chon giao vien khac!" << RESET << endl;
-        cout << "Hay nhap STT de chon giao vien: "; cin >> choice;
+        cout << "Hay nhap STT de chon giao vien: "; 
+        fflush(stdin);
+        getline(cin, schoice);
+        if (schoice == "") return nullptr;
+        else choice = stoi(schoice);
 
         if (choice < 1 || choice > v.size()) wrin = 1;
         else if (v[choice-1]->getClass() != nullptr && status) wrin = 2;

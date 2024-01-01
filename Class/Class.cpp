@@ -30,4 +30,19 @@ void Class::Add_Student(Student* x){
 void Class::Show_Student(){
     Students_Display(Cls_List);
 }
+//------------------------------------------------------
+bool Class::Cls_Cmp(const Class* a, const Class* b){
+    return a->Cls_Name < b->Cls_Name;
+}
+
+void Class::Cls_Delete(){
+    //xoa trong manager
+    auto clsptr = &ClassManagement::ReturnUniqueObject()->Class_List;
+    clsptr->erase(lower_bound(clsptr->begin(), clsptr->end(), this, Cls_Cmp));
+
+    //xoa trong tung stu
+    for (auto x : Cls_List){
+        x->setClass(nullptr);
+    }
+}
 

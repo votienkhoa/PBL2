@@ -64,9 +64,6 @@ int main(){
     crs3.Add_Student(&p1);
     // crs1.Set_Result(&p1);
     // crs1.Show_Student();
-
-    // p1.Courses_Display();
-    // p1.Stu_Delete();
     while(1){
         system("cls");
         cout << "1.Dang nhap" << endl;
@@ -76,12 +73,12 @@ int main(){
         if (choice == 1) m->Login();
         else break;
     }
+
     // cout << p1.getAccount()->getData()->getName() << endl;
     // crs1.Set_Result(&p1);
 
-    // cout << tmp2->getAccount1()->getData()->getName();
-
-    // cout << Teacher_Select(TeacherManagement::ReturnUniqueObject()->getTeacher_List(),0)->getName();
+    // tmp2->Tch_Delete();
+    
 
 
 

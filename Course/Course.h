@@ -22,11 +22,12 @@ class Course{
         double getTX(Student*);
         double getGK(Student*);
         double getCK(Student*);
-        Result getResult(Student*);
         void Add_Student(Student*);
         // void Set_Teacher()
         void Set_Result(Student*);
         void Show_Student();
+        void Course_Delete();
+        static bool Crs_Cmp(const Course*, const Course*);
         friend Student;
 
 };

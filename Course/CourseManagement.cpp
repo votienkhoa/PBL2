@@ -8,8 +8,11 @@ CourseManagement::~CourseManagement(){
 
 }
 //-------------------------------------
+vector<Course*>& CourseManagement::getCourse_List(){
+    return Course_List;
+}
 void CourseManagement::Add_Course(Course* x){
-    Course_List.push_back(x);
+    Course_List.insert(lower_bound(Course_List.begin(), Course_List.end(), x, Course::Crs_Cmp), x);
 }
 
 void CourseManagement::Courses_Display(){
