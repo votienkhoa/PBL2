@@ -1,6 +1,7 @@
 #include"Teacher.h"
 #include"../Class/Class.h"
 #include"../Course/Course.h"
+#include"../User/User.h"
 void Teacher::Birthday_Conv(){
     string res;
     string s = Tch_BD;
@@ -30,12 +31,34 @@ Class* Teacher::getClass(){
     return Tch_Class;
 }
 
+TeacherUser* Teacher::getAccount1(){
+    return Tch_Account1;
+}
+
+AdminUser* Teacher::getAccount2(){
+    return Tch_Account2;
+}
+
+int Teacher::getRealAccount(){
+    if (Tch_Account1 == nullptr) return 2;
+    else return 1;
+}
+
 void Teacher::setClass(Class* x){
     Tch_Class = x;
 }
+
+void Teacher::setAccount(User* x){
+    if (AdminUser* tmp = dynamic_cast<AdminUser*>(x)){
+        Tch_Account2 = tmp;
+    }
+    else{
+        Tch_Account1 = dynamic_cast<TeacherUser*>(x);
+    }
+}
 //----------------------------------------------
 
-void Teacher::Tch_Display(){
+void Teacher::Tch_Display1(){
     cout << "1.Ho va ten: " << Tch_Name << endl;
     cout << "2.MSSV: " << Tch_ID << endl;
     //--------------------------------
@@ -68,7 +91,7 @@ void Teacher::Tch_Edit(){
     while(1){
         system("cls");
         cout << "Hay kiem tra va chon thong tin can sua!" << endl;
-        Tch_Display();
+        Tch_Display1();
         cout << "6.Tro ve" << endl;
         cout << "Lua chon: ";   char c = _getch();
         fflush(stdin);

@@ -3,8 +3,13 @@
 TeacherUser::TeacherUser(string a, string b, Teacher* p) //thay bang Teacher
     : User(a,b,2), data(p)
 {
-
+    p->setAccount(this);
 }
+//-----------------------------------------------------------
+Teacher* TeacherUser::getData(){
+    return data;
+}
+//-----------------------------------------------------------
 
 void TeacherUser::UserAction(){
     while(1){
@@ -24,7 +29,7 @@ void TeacherUser::UserAction(){
         {
             case 1:
             {
-                this->data->Tch_Display();
+                this->data->Tch_Display1();
                 system("pause");
                 break;
             }

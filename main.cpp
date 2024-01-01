@@ -31,7 +31,9 @@ int main(){
     AdminUser* us3 = new AdminUser("admin", "admin", tmp3);
 
     Teacher* tmp4 = new Teacher("Dang Hoai Phuong", "111111111", 0, "31231231", "duahiedfa");
+    TeacherUser* us4 = new TeacherUser("phuong", "1", tmp4);
     tc->Add_Teacher(tmp4);
+    tc->Add_Teacher(tmp3);
 
     m->Add_User(us1);
     m->Add_User(us2);
@@ -76,6 +78,12 @@ int main(){
     }
     // cout << p1.getAccount()->getData()->getName() << endl;
     // crs1.Set_Result(&p1);
+
+    // cout << tmp2->getAccount1()->getData()->getName();
+
+    // cout << Teacher_Select(TeacherManagement::ReturnUniqueObject()->getTeacher_List(),0)->getName();
+
+
 
 
 

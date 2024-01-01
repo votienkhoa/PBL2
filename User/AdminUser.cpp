@@ -8,6 +8,11 @@ class UserManagement;
 AdminUser::AdminUser(string a, string b, Teacher* p)
     : User(a,b,3), data(p)
 {
+    p->setAccount(this);
+}
+//-------------------------------------------------
+Teacher* AdminUser::getData(){
+    return data;
 }
 //------------------------------------------------------
 void AdminUser::Action_to_Stu(NormalUser* x){
@@ -51,7 +56,7 @@ void AdminUser::Action_to_Stu(NormalUser* x){
             }
             case 5:
             {
-                ChangePassword();
+                x->ChangePassword();
                 break;
             }
             case 6:
@@ -63,7 +68,7 @@ void AdminUser::Action_to_Stu(NormalUser* x){
                 char c = _getch();
                 int choice = c - '0';
                 if (choice == 1){
-                    x->data->Stu_Delete();
+                    x->data->Stu_Delete(); 
                     return;
                 }
 
@@ -81,6 +86,124 @@ void AdminUser::Action_to_Stu(NormalUser* x){
         if (Logout) break;
     }
 }
+
+
+void AdminUser::Action_to_Teacher(TeacherUser* x){
+    while(1){
+        bool Logout = false;
+        system("cls");
+        cout << "1. Xem thong tin ca nhan" << endl;
+        cout << "2. Chinh sua thong tin ca nhan" << endl;
+        cout << "3. Xem danh sach lop hoc phan dang dam nhiem" << endl;
+        cout << "4. Xoa giao vien nay" << endl;
+        cout << "5. Doi mat khau" << endl;
+        cout << "6. Tro ve" << endl;
+
+        char c = _getch();
+        int choice = c - '0';
+        system("cls");
+        switch (choice)
+        {
+            case 1:
+            {
+                x->data->Tch_Display1();
+                system("pause");
+                break;
+            }
+            case 2:
+            {
+                x->data->Tch_Edit();
+                break;
+            }
+            case 3:
+            {
+                x->data->Courses_Display();
+                system("pause");
+                break;
+            }
+            case 4:
+            {
+                cout << "Chua code cai nay" << endl;
+                system("pause");
+                break;
+            }
+            case 5:
+            {
+                x->ChangePassword();
+                break;
+            }
+            case 6:
+            {
+                Logout = true;
+            }
+            
+            default:
+                break;
+        }
+
+        if (Logout) break;
+    }
+}
+
+void AdminUser::Action_to_Admin(AdminUser* x){
+    while(1){
+        bool Logout = false;
+        system("cls");
+        cout << "1. Xem thong tin ca nhan" << endl;
+        cout << "2. Chinh sua thong tin ca nhan" << endl;
+        cout << "3. Xem danh sach lop hoc phan dang dam nhiem" << endl;
+        cout << "4. Xoa giao vien nay" << endl;
+        cout << "5. Doi mat khau" << endl;
+        cout << "6. Dang xuat" << endl;
+
+        char c = _getch();
+        int choice = c - '0';
+        system("cls");
+        switch (choice)
+        {
+            case 1:
+            {
+                this->data->Tch_Display1();
+                system("pause");
+                break;
+            }
+            case 2:
+            {
+                this->data->Tch_Edit();
+                break;
+            }
+            case 3:
+            {
+                data->Courses_Display();
+                system("pause");
+                break;
+            }
+            case 4:
+            {
+                cout << RED << "Giao vien nay la quan tri vien, khong the xoa!"; cout << endl;
+                cout << "Luu y: Neu muon xoa, hay truy cap vao danh sach quan tri vien!" << RESET << endl;
+                system("pause");
+                break;
+            }
+            case 5:
+            {
+                ChangePassword();
+                break;
+            }
+            case 6:
+            {
+                Logout = true;
+            }
+            
+            default:
+                break;
+        }
+
+        if (Logout) break;
+    }
+}
+//------------------------------------------------------------------------
+
 
 
 void AdminUser::UserAction(){
@@ -103,7 +226,7 @@ void AdminUser::UserAction(){
         {
             case 1:
             {
-                this->data->Tch_Display();
+                this->data->Tch_Display1();
                 system("pause");
                 break;
             }
@@ -157,9 +280,15 @@ void AdminUser::UserAction(){
                             else break;
                         }
                     }
-                    else if (choice == 2) Teachers_Display(TeacherManagement::ReturnUniqueObject()->getTeacher_List()); 
-                    else if (choice == 3) ClassManagement::ReturnUniqueObject()->Classes_Display(); 
-                    else if (choice == 4) CourseManagement::ReturnUniqueObject()->Courses_Display(); 
+                    else if (choice == 2){
+                        while(1){
+                            Teacher* tmp = Teacher_Select(TeacherManagement::ReturnUniqueObject()->getTeacher_List(),0);
+                            if (tmp->getRealAccount() == 1) Action_to_Teacher(tmp->getAccount1());
+                            else Action_to_Admin(tmp->getAccount2());
+                        }
+                    }
+                    else if (choice == 3) ClassManagement::ReturnUniqueObject()->Classes_Display();
+                    else if (choice == 4) CourseManagement::ReturnUniqueObject()->Courses_Display();
                     else if (c2 == 13) break;
                 }
                 break;

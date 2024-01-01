@@ -39,7 +39,9 @@ class TeacherUser : public User{
         Teacher* data; //se la class teacher
     public:
         TeacherUser(string = "NULL", string = "NULL", Teacher* = nullptr);
+        Teacher* getData();
         void UserAction();
+        friend class AdminUser;
 };
 
 class AdminUser : public User{ //Quan tri tat ca moi thu
@@ -47,6 +49,9 @@ class AdminUser : public User{ //Quan tri tat ca moi thu
         Teacher* data;
     public:
         AdminUser(string = "NULL", string = "NULL", Teacher* = nullptr);
+        Teacher* getData();
         void UserAction();
         void Action_to_Stu(NormalUser*);
+        void Action_to_Teacher(TeacherUser*);
+        void Action_to_Admin(AdminUser*);
 };
