@@ -9,6 +9,7 @@ AdminUser::AdminUser(string a, string b, Teacher* p)
     : User(a,b,3), data(p)
 {
     p->setAccount(this);
+    UserManagement::ReturnUniqueObject()->Add_User(this);
 }
 //-------------------------------------------------
 Teacher* AdminUser::getData(){
@@ -117,13 +118,22 @@ void AdminUser::Action_to_Teacher(TeacherUser* x){
             }
             case 3:
             {
-                x->data->Courses_Display();
+                x->data->Courses_Show();
                 system("pause");
                 break;
             }
             case 4:
             {
-                x->data->Tch_Delete();
+                cout << RED << "Ban co chac chan muon xoa giao vien nay?" << RESET << endl;
+                cout << RED << "Luu y: Khi xoa giao vien nay thi toan bo thong tin ve lop hoc phan va lop chu nhiem do giao vien nay dam nhiem se bi xoa" << RESET << endl;
+                cout << "1. Xoa giao vien nay" << endl;
+                cout << "2. Tro ve" << endl;
+                char c = _getch();
+                int choice = c - '0';
+                if (choice == 1){
+                    x->data->Tch_Delete();
+                    return;
+                }
                 return;
             }
             case 5:
@@ -173,7 +183,7 @@ void AdminUser::Action_to_Admin(AdminUser* x){
             }
             case 3:
             {
-                data->Courses_Display();
+                data->Courses_Show();
                 system("pause");
                 break;
             }
@@ -288,7 +298,10 @@ void AdminUser::UserAction(){
                         }
                     }
                     else if (choice == 3) ClassManagement::ReturnUniqueObject()->Classes_Display();
-                    else if (choice == 4) CourseManagement::ReturnUniqueObject()->Courses_Display();
+                    else if (choice == 4){
+                        Courses_Display(CourseManagement::ReturnUniqueObject()->getCourse_List());
+                        getch();
+                    }
                     else if (c2 == 13) break;
                 }
                 break;

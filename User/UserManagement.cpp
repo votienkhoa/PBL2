@@ -6,7 +6,6 @@ UserManagement::UserManagement(){
 
 }
 UserManagement::~UserManagement(){
-    cout << "HuyUserMana" << endl;
 }
 //-----------------------------------------------------------
 UserManagement* UserManagement::ReturnUniqueObject(){

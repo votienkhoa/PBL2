@@ -25,7 +25,8 @@ class Student{
         Class* Stu_Class;
         vector<Course*> Stu_Courses;
     public:
-        Student(string = "NULL", string = "NULL", bool = 0, string = "NULL", string = "NULL", Class* = nullptr);
+        Student(string, string , bool, string, string , Class* = nullptr);
+        Student(string);
         ~Student();
         string getName();
         string getID() const;

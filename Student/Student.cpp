@@ -20,7 +20,11 @@ Student::Student(string a, string b, bool c, string d, string e, Class* f )
  : Stu_Name(a), Stu_ID(b), Stu_Sex(c), Stu_BD(d), Stu_Address(e), Stu_Class(f)
 {
     Birthday_Conv();
+    StudentManagement::ReturnUniqueObject()->Add_Student(this);
 }
+Student::Student(string id)
+    : Stu_ID(id)
+{}
 Student::~Student(){
 
 }
@@ -57,7 +61,7 @@ void Student::Stu_Display1(){
     //-------------------------------
     cout << "5.Dia chi: " << Stu_Address << endl;
     //------------------------------
-    cout << "6.Lop: " << Stu_Class->getName() << endl;
+    cout << "6.Lop: " << (Stu_Class ? (Stu_Class->getName()) : "Chua co lop") << endl;
 }
 
 void Student::Stu_Display2(){
@@ -113,8 +117,8 @@ void Student::Stu_Edit(){
             }
             case 2:
             {
-                cout << "MSSV cu: " << this->Stu_ID << endl;
-                cout << "MSSV moi: ";
+                cout << "MSGV cu: " << this->Stu_ID << endl;
+                cout << "MSGV moi: ";
                 string s; getline(cin, s);
                 this->Stu_ID = s;
                 break;

@@ -27,7 +27,7 @@ void ClassManagement::Classes_Display(){
     cout << setw(15) << left << "Ten lop" ;
     cout << setw(8) << left << "Si so";
     cout << setw(25) << left << "GVCN" ;
-    cout << endl;
+    cout << endl << endl;
     int i = 1;
     for (auto x : Class_List){
         cout << setw(8) << left << i; i++;

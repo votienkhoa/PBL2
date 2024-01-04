@@ -26,7 +26,8 @@ class Teacher{
         TeacherUser* Tch_Account1 = nullptr;
         AdminUser* Tch_Account2 = nullptr;
     public:
-        Teacher(string = "NULL", string = "NULL", bool = 0, string = "NULL", string = "NULL", Class* = nullptr);
+        Teacher(string , string , bool , string , string , Class* = nullptr);
+        Teacher(string);
         ~Teacher();
         string getName();
         Class* getClass();
@@ -35,7 +36,7 @@ class Teacher{
         int getRealAccount();
         void setAccount(User*);
         void setClass(Class*);
-        void Courses_Display();
+        void Courses_Show();
         void Tch_Display1();
         void Tch_Display2();
         void Tch_Edit();
@@ -44,6 +45,5 @@ class Teacher{
         static bool Tch_Cmp(const Teacher*, const Teacher*);
         friend Course;
         friend TeacherManagement;
-        // void Call_StudentManagement(StudentManagement*);
-        // friend class TeacherManagement;
+        friend class TeacherUser;
 };

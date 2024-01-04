@@ -1,9 +1,10 @@
 #include"Course.h"
 
-Course::Course(string a, Teacher* b)
-    : Crs_Name(a), Crs_Teacher(b)
+Course::Course(string a, string b, Teacher* c)
+    : Crs_ID(a), Crs_Name(b), Crs_Teacher(c)
 {
-    b->Tch_Courses.insert(lower_bound(b->Tch_Courses.begin(), b->Tch_Courses.end(), this, Crs_Cmp), this);
+    c->Tch_Courses.insert(lower_bound(c->Tch_Courses.begin(), c->Tch_Courses.end(), this, Crs_Cmp), this);
+    CourseManagement::ReturnUniqueObject()->Add_Course(this);
 }
 Course::~Course(){
 
@@ -12,8 +13,14 @@ Course::~Course(){
 string Course::getName(){
     return Crs_Name;
 }
+string Course::getID(){
+    return Crs_ID;
+}
 string Course::getTeacherName(){
     return Crs_Teacher->getName();
+}
+int Course::getNumber(){
+    return Res_List.size();
 }
 
 double Course::getTX(Student* x){
@@ -27,11 +34,20 @@ double Course::getGK(Student* x){
 double Course::getCK(Student* x){
     return Res_List[x].CK;
 }
+void Course::setTX(Student* x, double a){
+    Res_List[x].TX = a;
+}
+void Course::setGK(Student* x, double a){
+    Res_List[x].GK = a;
+}
+void Course::setCK(Student* x, double a){
+    Res_List[x].CK = a;
+}
 //----------------------------
 void Course::Add_Student(Student* x){
     Result tmp;
     Res_List[x] = tmp;
-    x->Stu_Courses.insert(lower_bound( x->Stu_Courses.begin(),  x->Stu_Courses.end(), this, Crs_Cmp), this);
+    x->Stu_Courses.insert(lower_bound(x->Stu_Courses.begin(),  x->Stu_Courses.end(), this, Crs_Cmp), this);
 }
 
 void Course::Set_Result(Student* x){
@@ -108,7 +124,7 @@ void Course::Show_Student(){
 }
 //-----------------------------------------------
 bool Course::Crs_Cmp(const Course* a, const Course* b){
-    return a->Crs_Name < b->Crs_Name;
+    return a->Crs_ID < b->Crs_ID;
 }
 
 void Course::Course_Delete(){

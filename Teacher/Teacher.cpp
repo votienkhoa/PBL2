@@ -1,7 +1,9 @@
 #include"Teacher.h"
 #include"../Class/Class.h"
 #include"../Course/Course.h"
+// #include"../Teacher/TeacherManagement.h"
 #include"../User/UserManagement.h"
+#include"../Public/PublicFunction.h"
 void Teacher::Birthday_Conv(){
     string res;
     string s = Tch_BD;
@@ -17,7 +19,11 @@ Teacher::Teacher(string a, string b, bool c, string d, string e, Class* f)
     : Tch_Name(a), Tch_ID(b), Tch_Sex(c), Tch_BD(d), Tch_Address(e), Tch_Class(f)
 {
     Birthday_Conv();
+    TeacherManagement::ReturnUniqueObject()->Add_Teacher(this);
 }
+Teacher::Teacher(string id)
+    : Tch_ID(id)
+{}
 
 Teacher::~Teacher(){
 
@@ -60,7 +66,7 @@ void Teacher::setAccount(User* x){
 
 void Teacher::Tch_Display1(){
     cout << "1.Ho va ten: " << Tch_Name << endl;
-    cout << "2.MSSV: " << Tch_ID << endl;
+    cout << "2.MSGV: " << Tch_ID << endl;
     //--------------------------------
     cout << "3.Ngay sinh: " << Tch_BD << endl;
     //-----------------------------
@@ -69,7 +75,7 @@ void Teacher::Tch_Display1(){
     //-------------------------------
     cout << "5.Dia chi: " << Tch_Address << endl;
     //------------------------------
-    // cout << "6.Lop chu nhiem: " << Tch_Class->getName() << endl;
+    cout << "6.Lop chu nhiem: " << (Tch_Class == nullptr ? "Chua co lop" : Tch_Class->getName()) << endl;
 }
 void Teacher::Tch_Display2(){
     cout << setw(25) << left << Tch_Name;
@@ -81,10 +87,8 @@ void Teacher::Tch_Display2(){
     cout << endl;
 }
 
-void Teacher::Courses_Display(){
-    for (auto x : Tch_Courses){
-        cout << x->getName() << endl;
-    }
+void Teacher::Courses_Show(){
+    Courses_Display(Tch_Courses);
 }
 
 void Teacher::Tch_Edit(){
@@ -92,7 +96,7 @@ void Teacher::Tch_Edit(){
         system("cls");
         cout << "Hay kiem tra va chon thong tin can sua!" << endl;
         Tch_Display1();
-        cout << "6.Tro ve" << endl;
+        cout << "7.Tro ve" << endl;
         cout << "Lua chon: ";   char c = _getch();
         fflush(stdin);
         system("cls");
@@ -144,6 +148,12 @@ void Teacher::Tch_Edit(){
             }
             case 6:
             {
+                cout << RED << "Thong tin nay khong the chinh sua!" << RESET << endl;
+                getch();
+                break;
+            }
+            case 7:
+            {
                 breaker = true;
                 break;
             }
@@ -188,8 +198,9 @@ void Teacher::Tch_Delete(){
     if (Tch_Account1) delete Tch_Account1;
     else delete Tch_Account2;
 
+
     //xoa lop
-    Tch_Class->Cls_Delete();
+    if (Tch_Class) Tch_Class->Cls_Delete();
     // delete Tch_Class;
 
     //xoa loi hoc phan

@@ -11,7 +11,6 @@ class CourseManagement{
         ~CourseManagement();
         vector<Course*>& getCourse_List();
         void Add_Course(Course*);
-        void Courses_Display();
         static CourseManagement* ReturnUniqueObject();
 
         friend Course;

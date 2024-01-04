@@ -7,6 +7,7 @@ Class::Class(string a, Teacher* b)
     : Cls_Name(a), Cls_Teacher(b)
 {
     b->setClass(this);
+    ClassManagement::ReturnUniqueObject()->Add_Class(this);
 }
 
 Class::~Class(){

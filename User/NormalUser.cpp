@@ -1,9 +1,11 @@
 #include"User.h"
+#include"UserManagement.h"
 
 NormalUser::NormalUser(string a, string b, Student* p)
     : User(a,b,1), data(p)
 {
     p->setAccount(this);
+    UserManagement::ReturnUniqueObject()->Add_User(this);
 }
 
 Student* NormalUser::getData(){

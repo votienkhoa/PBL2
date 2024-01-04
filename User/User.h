@@ -41,6 +41,8 @@ class TeacherUser : public User{
         TeacherUser(string = "NULL", string = "NULL", Teacher* = nullptr);
         Teacher* getData();
         void UserAction();
+        void Action_to_Course(Course*);
+        void Action_to_Stu(Student*, Course*);
         friend class AdminUser;
 };
 
