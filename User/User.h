@@ -18,6 +18,8 @@ class User{
     public:
         User(string = "NULL", string = "NULL", int = 1);
         ~User();
+        string getUsername() const;
+        string getPassword() const;
         virtual void UserAction();
         bool Check_Login(string, string);
         void ChangePassword();

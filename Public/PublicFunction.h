@@ -23,3 +23,8 @@ void loadTeacher();
 void loadAdmin();
 void loadClass();
 void loadCourse();
+void saveStudent();
+void saveTeacher();
+void saveAdmin();
+void saveClass();
+void saveCourse();

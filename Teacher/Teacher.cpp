@@ -18,7 +18,6 @@ void Teacher::Birthday_Conv(){
 Teacher::Teacher(string a, string b, bool c, string d, string e, Class* f)
     : Tch_Name(a), Tch_ID(b), Tch_Sex(c), Tch_BD(d), Tch_Address(e), Tch_Class(f)
 {
-    Birthday_Conv();
     TeacherManagement::ReturnUniqueObject()->Add_Teacher(this);
 }
 Teacher::Teacher(string id)

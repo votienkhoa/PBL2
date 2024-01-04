@@ -28,8 +28,11 @@ class Student{
         Student(string, string , bool, string, string , Class* = nullptr);
         Student(string);
         ~Student();
-        string getName();
+        string getName() const;
         string getID() const;
+        bool getSex() const;
+        string getBD() const;
+        string getAddress() const;
         NormalUser* getAccount();
         void setClass(Class*);
         void setAccount(NormalUser*);

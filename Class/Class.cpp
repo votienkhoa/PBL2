@@ -18,8 +18,12 @@ vector<Student*> Class::getCls_List(){
     return Cls_List;
 }
 
-string Class::getName(){
+string Class::getName() const{
     return Cls_Name;
+}
+
+string Class::getTeacherName() const{
+    return Cls_Teacher->getName();
 }
 //-------------------------------
 void Class::Add_Student(Student* x){

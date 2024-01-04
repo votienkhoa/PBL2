@@ -68,14 +68,17 @@ void UserManagement::Register(int role){
 
     if (role == 1){
         Student* tmpdata = Stu_Create();
+        tmpdata->Birthday_Conv();
         tmp = new NormalUser(a,b,tmpdata);
     }
     else if (role == 2){
         Teacher* tmpdata = Tch_Create();
+        tmpdata->Birthday_Conv();
         tmp = new TeacherUser(a,b,tmpdata);
     }
     else{
         Teacher* tmpdata = Tch_Create();
+        tmpdata->Birthday_Conv();
         tmp = new AdminUser(a,b,tmpdata);
     }
     users.push_back(tmp);

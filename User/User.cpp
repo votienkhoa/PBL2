@@ -9,6 +9,13 @@ User::User(string _username, string _password, int r)
 User::~User(){
 
 }
+//--------------------------------
+string User::getUsername() const{
+    return username;
+}
+string User::getPassword() const{
+    return password;
+}
 
 bool User::Check_Login(string username, string password){
     return (username == this->username && password == this->password);

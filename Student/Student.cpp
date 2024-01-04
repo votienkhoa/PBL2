@@ -19,7 +19,6 @@ void Student::Birthday_Conv(){
 Student::Student(string a, string b, bool c, string d, string e, Class* f )
  : Stu_Name(a), Stu_ID(b), Stu_Sex(c), Stu_BD(d), Stu_Address(e), Stu_Class(f)
 {
-    Birthday_Conv();
     StudentManagement::ReturnUniqueObject()->Add_Student(this);
 }
 Student::Student(string id)
@@ -30,12 +29,21 @@ Student::~Student(){
 }
 
 //----------------------------------------------------
-string Student::getName(){
+string Student::getName() const{
     return Stu_Name;
 }
 
 string Student::getID() const{
     return Stu_ID;
+}
+bool Student::getSex() const{
+    return Stu_Sex;
+}
+string Student::getBD() const{
+    return Stu_BD;
+}
+string Student::getAddress() const{
+    return Stu_Address;
 }
 
 NormalUser* Student::getAccount(){

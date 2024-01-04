@@ -377,13 +377,10 @@ void loadClass(){
         while(getline(token,id,',')){
             Student virstu(id);
             Student* tmp2 = *(lower_bound(stumng.begin(), stumng.end(),&virstu, Student::Stu_Cmp));
-            cout << tmp2->getName();
             tmp->Add_Student(tmp2);
         }
         turn = 1;
-        cout <<1;
     }
-    cout << 2;
 }
 
 void loadCourse(){
@@ -422,4 +419,38 @@ void loadCourse(){
         }
     }
 }
+//-------------------------------------------------------
+void saveStudent(){
+    ofstream f("Database/Student.csv");
+    auto v = UserManagement::ReturnUniqueObject()->getUsers();
+    for (auto x : v){
+        if (NormalUser* tmp = dynamic_cast<NormalUser*>(x)){
+            f << tmp->getData()->getName() << ',';
+            f << tmp->getData()->getID() << ',';
+            f << (tmp->getData()->getSex() ? 1 : 0) << ',';
+            f << tmp->getData()->getBD() << ',';
+            f << tmp->getData()->getAddress() << ',';
+            f << tmp->getUsername() << ',';
+            f << tmp->getPassword() << endl;
+        }
+    }
+}
+
+void saveClass(){
+    ofstream f("Database/Class.csv");
+    auto v = ClassManagement::ReturnUniqueObject()->getClass_List();
+    for (auto x : v){
+        f << x->getName() << ',';
+        f << x->getTeacherName() << endl;
+        int sz = x->getCls_List().size();
+        int i = 1;
+        for (auto z : x->getCls_List()){
+            if (i == sz) f << z->getID() << endl;
+            else f << z->getID() << ',';
+            i++;
+        }
+    }
+}
+
+
 
