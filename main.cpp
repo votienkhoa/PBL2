@@ -10,15 +10,16 @@ int main(){
     loadCourse();
     loadAdmin();
     
-    // while(1){
-    //     system("cls");
-    //     cout << "1.Dang nhap" << endl;
-    //     cout << "2.Thoat chuong trinh" << endl;
-    //     char c = getch();
-    //     int choice = c - '0';
-    //     if (choice == 1) UserManagement::ReturnUniqueObject()->Login();
-    //     else break;
-    // }
-    saveStudent();
-    saveClass();
+    while(1){
+        system("cls");
+        cout << "1.Dang nhap" << endl;
+        cout << "2.Thoat chuong trinh" << endl;
+        char c = getch();
+        int choice = c - '0';
+        if (choice == 1) UserManagement::ReturnUniqueObject()->Login();
+        else{
+            saveStudent();
+            saveClass();
+        }
+    }
 }

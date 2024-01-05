@@ -441,7 +441,7 @@ void saveClass(){
     auto v = ClassManagement::ReturnUniqueObject()->getClass_List();
     for (auto x : v){
         f << x->getName() << ',';
-        f << x->getTeacherName() << endl;
+        f << x->getTeacherID() << endl;
         int sz = x->getCls_List().size();
         int i = 1;
         for (auto z : x->getCls_List()){

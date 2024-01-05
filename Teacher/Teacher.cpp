@@ -32,6 +32,10 @@ string Teacher::getName(){
     return Tch_Name;
 }
 
+string Teacher::getID(){
+    return Tch_ID;
+}
+
 Class* Teacher::getClass(){
     return Tch_Class;
 }

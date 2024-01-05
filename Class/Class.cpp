@@ -22,8 +22,8 @@ string Class::getName() const{
     return Cls_Name;
 }
 
-string Class::getTeacherName() const{
-    return Cls_Teacher->getName();
+string Class::getTeacherID() const{
+    return Cls_Teacher->getID();
 }
 //-------------------------------
 void Class::Add_Student(Student* x){

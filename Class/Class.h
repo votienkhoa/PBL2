@@ -16,7 +16,7 @@ class Class{
         Class(string = "NULL", Teacher* = nullptr);
         ~Class();
         string getName() const;
-        string getTeacherName() const;
+        string getTeacherID() const;
         vector<Student*> getCls_List();
         void Add_Student(Student*);
         void Show_Student();

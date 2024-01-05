@@ -30,6 +30,7 @@ class Teacher{
         Teacher(string);
         ~Teacher();
         string getName();
+        string getID();
         Class* getClass();
         TeacherUser* getAccount1();
         AdminUser* getAccount2();
