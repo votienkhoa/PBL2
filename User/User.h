@@ -43,7 +43,8 @@ class TeacherUser : public User{
         TeacherUser(string = "NULL", string = "NULL", Teacher* = nullptr);
         Teacher* getData();
         void UserAction();
-        void Action_to_Course(Course*);
+        void Action_to_Course1(Course*);
+        void Action_to_Course2(Course*);
         void Action_to_Stu(Student*, Course*);
         friend class AdminUser;
 };
@@ -56,7 +57,11 @@ class AdminUser : public User{ //Quan tri tat ca moi thu
         Teacher* getData();
         void UserAction();
         void Action_to_Stu(NormalUser*);
+        void Action_to_Stu1(Student*, Course*);
         void Action_to_Teacher(TeacherUser*);
         void Action_to_Admin(AdminUser*);
         void Action_to_Course(Course*);
+        void Action_to_Course1(Course*);
+        void Action_to_Course2(Course*);
+        void Action_to_Class(Class*);
 };

@@ -16,7 +16,7 @@ Student* Stu_Create(){
         bool ID_Check = 0;
         auto v = StudentManagement::ReturnUniqueObject()->getStudent_List();
         for (auto x : v){
-            if (x->getID() == b){
+            if (x->getID() == ("SV" + b)){
                 ID_Check = 1;
                 break;
             }
@@ -62,7 +62,7 @@ Student* Stu_Create(){
     }
     c2 = stoi(c1) - 1;
     //nhap ngay sinh--------------
-    cout << "Ngay sinh: "; cin >> d;
+    cout << "Ngay sinh (hay nhap duoi dang ddmmyyyy): "; cin >> d;
     cout << "Dia chi: "; 
     fflush(stdin); getline(cin, e);
     system("cls");
@@ -84,22 +84,70 @@ Student* Stu_Create(){
 Teacher* Tch_Create(){
     string a,b,c1,d,e;
     bool c2;
+    //nhap ho ten
     cout << "Hay nhap thong tin ca nhan cua giao vien!" << endl;
     cout << "Ho va ten: "; 
     fflush(stdin);  getline(cin, a);
-    cout << "MSGV: "; cin >> b;
+    //nhap ms
+    // cout << "MSGV: "; cin >> b;
+    while(1){
+        cout << "MSGV: "; cin >> b;
+
+        bool ID_Check = 0;
+        auto v = TeacherManagement::ReturnUniqueObject()->getTeacher_List();
+        for (auto x : v){
+            if (x->getID() == ("GV" + b)){
+                ID_Check = 1;
+                break;
+            }
+        }
+        if (!ID_Check){
+            system("cls");
+            cout << "Hay nhap thong tin ca nhan!" << endl;
+            cout << "Ho va ten: " << a << endl;
+            cout << "MSGV: " << b << endl;
+            break;
+        }
+        else{
+            system("cls");
+            cout << "Hay nhap thong tin ca nhan!" << endl;
+            cout << "Ho va ten: "; cout << a << endl;
+            cout << RED << "MSGV nay da ton tai! Vui long chon MSSV khac!" << RESET << endl;
+        }
+    }
+    //nhap gioi tinh
     cout << "Gioi tinh: " << endl;
     cout << "1.Nu" << endl << "2.Nam" << endl;
-    cout << "Lua chon cua ban: "; cin >> c1;
-    c2 = stoi(c1) - 1;
-    cout << "Ngay sinh: "; cin >> d;
+    while(1){
+        cout << "Lua chon cua ban: "; cin >> c1;
+        if (c1 != "1" && c1!="2"){
+            system("cls");
+            cout << "Hay nhap thong tin ca nhan!" << endl;
+            cout << "Ho va ten: " << a << endl;
+            cout << "MSGV: " << b << endl;
+            cout << "Gioi tinh: " << endl;
+            cout << "1.Nu" << endl << "2.Nam" << endl;
+            cout << RED << "Nhap sai! Vui long nhap lai!" << RESET << endl;
+        }
+        else{
+            system("cls");
+            cout << "Hay nhap thong tin ca nhan!" << endl;
+            cout << "Ho va ten: " << a << endl;
+            cout << "MSGV: " << b << endl;
+            cout << "Gioi tinh: " << endl;
+            cout << "1.Nu" << endl << "2.Nam" << endl;
+            cout << "Lua chon cua ban: "; cout << c1 << endl;
+            break;
+        }
+    }
+    //nhap ngay sinh
+    cout << "Ngay sinh (hay nhap duoi dang ddmmyyyy): "; cin >> d;
     cout << "Dia chi: "; 
     fflush(stdin); getline(cin, e);
     Teacher* tmp = new Teacher(a,"GV"+b,c2,d,e);
+    tmp->Birthday_Conv();
 
     tmp->Tch_Edit();
-
-    TeacherManagement::ReturnUniqueObject()->Add_Teacher(tmp);
 
     //----------------
     return tmp;
@@ -205,6 +253,7 @@ Course* Course_Select(const vector<Course*>& v){
     int choice;
     string schoice;
     while(1){
+        system("cls");
         Courses_Display(v);
 
         cout << endl;
@@ -223,13 +272,19 @@ Course* Course_Select(const vector<Course*>& v){
 Class* Class_Select(){
     int wrin = 0;
     int choice;
+    string schoice;
     while(1){
+        system("cls");
         ClassManagement* x =ClassManagement::ReturnUniqueObject();
         x->Classes_Display();
 
         cout << endl;
         if (wrin == 1) cout << RED << "Lua chon khong hop le, vui long nhap lai!" <<  RESET << endl;
-        cout << "Hay nhap lua chon cua ban: "; cin >> choice;
+        cout << "Hay nhap lua chon cua ban: ";
+        fflush(stdin);
+        getline(cin,schoice);
+        if (schoice == "") return nullptr;
+        else choice = stoi(schoice);
 
         if (choice < 1 || choice > x->getClass_List().size()) wrin = 1;
         else return x->getClass_List()[choice-1];
@@ -267,7 +322,22 @@ void Class_Create(){
 
 void Course_Create(){
     string ID;
-    cout << "Hay nhap ma HP: "; cin >> ID;
+    while(1){
+        bool breaker = 1;
+        cout << "Hay nhap ma HP: ";
+        fflush(stdin);
+        getline(cin,ID);
+        if (ID == "") return;
+        for (auto x : CourseManagement::ReturnUniqueObject()->getCourse_List()){
+            if (x->getID() == ("HP" + ID)){
+                system("cls");
+                cout << RED << "Ten lop da ton tai! Vui long chon ten khac!" << RESET << endl;
+                breaker = 0;
+                break;
+            }
+        }
+        if (breaker) break;
+    }
     string a;
     cout << "Hay nhap ten lop hoc phan: "; 
     fflush(stdin);

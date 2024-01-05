@@ -117,10 +117,8 @@ void Teacher::Tch_Edit(){
             }
             case 2:
             {
-                cout << "MSSV cu: " << this->Tch_ID << endl;
-                cout << "MSSV moi: ";
-                string s; getline(cin, s);
-                this->Tch_ID = s;
+                cout << RED << "Thong tin nay khong the chinh sua!" << RESET << endl;
+                getch();
                 break;
             }
             case 3:
@@ -134,11 +132,19 @@ void Teacher::Tch_Edit(){
             }
             case 4:
             {
-                cout << "Gioi tinh cu: " << (this->Tch_Sex ? "Nam" : "Nu") << endl;
-                cout << "1.Nu" << endl << "2.Nam" << endl;
-                cout << "Gioi tinh moi: ";
-                int b; cin >> b;
-                this->Tch_Sex = abs(b-1);
+                while(1){
+                    cout << "Gioi tinh cu: " << (this->Tch_Sex ? "Nam" : "Nu") << endl;
+                    cout << "1.Nu" << endl << "2.Nam" << endl;
+                    cout << "Gioi tinh moi: ";
+                    string b; cin >> b;
+                    if (b != "1" && b!="2"){
+                        system("cls");
+                        cout << RED << "Nhap sai! Vui long nhap lai!" << RESET << endl;
+                        continue;
+                    }
+                    this->Tch_Sex = abs(stoi(b)-1);
+                    break;
+                }
                 break;
             }
             case 5:

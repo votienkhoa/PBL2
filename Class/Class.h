@@ -18,6 +18,7 @@ class Class{
         string getName() const;
         string getTeacherID() const;
         vector<Student*> getCls_List();
+        void Class_Info();
         void Add_Student(Student*);
         void Show_Student();
         void Cls_Delete();

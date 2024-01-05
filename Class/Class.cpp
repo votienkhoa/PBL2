@@ -26,6 +26,11 @@ string Class::getTeacherID() const{
     return Cls_Teacher->getID();
 }
 //-------------------------------
+void Class::Class_Info(){
+    cout << "1.Ten lop sinh hoat: " << Cls_Name << endl;
+    cout << "2.GVCN: " << Cls_Teacher->getName() << endl;
+    cout << "3.Si so: " << Cls_List.size();
+}
 void Class::Add_Student(Student* x){
     Cls_List.insert(lower_bound(Cls_List.begin(), Cls_List.end(), x, Student::Stu_Cmp), x);
     x->setClass(this);

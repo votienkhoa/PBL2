@@ -57,7 +57,7 @@ void TeacherUser::Action_to_Stu(Student* x, Course* y){
     }
 }
 //-----------------------------------------------------------
-void TeacherUser::Action_to_Course(Course* x){
+void TeacherUser::Action_to_Course1(Course* x){
     if (x->Res_List.size() == 0){
         system("cls");
         cout << RED << "Lop hoc phan nay chua co sinh vien!" << RESET << endl;
@@ -89,6 +89,28 @@ void TeacherUser::Action_to_Course(Course* x){
                 }
                 i++;
             }
+        }
+    }
+}
+//--------------------------------------------------------
+void TeacherUser::Action_to_Course2(Course* x){
+    while(1){
+        Student* tmp = Student_Select(StudentManagement::ReturnUniqueObject()->getStudent_List());
+        if (tmp == nullptr) return;
+
+        bool breaker = 1;
+        for (auto z : x->Res_List){
+            if (z.first == tmp){
+                system("cls");
+                cout << RED << "Sinh vien nay da ton tai trong lop hoc phan" << RESET << endl;
+                breaker = 0;
+                getch();
+                break;
+            }
+        }
+        if (breaker){
+            x->Add_Student(tmp);
+            break;
         }
     }
 }
@@ -127,7 +149,8 @@ void TeacherUser::UserAction(){
                 break;
             }
             case 4:
-            {
+            {   
+                
                 if (data->Tch_Courses.size() == 0){
                     cout << RED << "Giao vien nay chua dam nhiem lop hoc phan nao" << RESET << endl;
                     getch();
@@ -136,9 +159,23 @@ void TeacherUser::UserAction(){
                 while(1){
                     system("cls");
                     Course* tmp = Course_Select(data->Tch_Courses);
-                    if (tmp) Action_to_Course(tmp);
+                    if (tmp){
+                        while(1){
+                            system("cls");
+                            cout << "1. Them sinh vien vao lop" << endl;
+                            cout << "2. Xem sinh vien cua lop " << endl;
+                            cout << "3. Tro ve" << endl;
+                            char c = _getch();
+
+                            system("cls");
+                            if (c == '1') Action_to_Course2(tmp);
+                            else if (c == '2') Action_to_Course1(tmp);
+                            else if (c == '3') break;
+                        }
+                    }
                     else break;
                 }
+                
                 break;
             }
             case 5:

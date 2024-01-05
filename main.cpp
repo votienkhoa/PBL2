@@ -17,10 +17,11 @@ int main(){
         char c = getch();
         int choice = c - '0';
         if (choice == 1) UserManagement::ReturnUniqueObject()->Login();
-        else{
+        else if (choice == 2){
             saveStudent();
             saveClass();
             break;
         }
+        else continue;
     }
 }

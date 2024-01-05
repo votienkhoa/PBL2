@@ -37,5 +37,6 @@ class Course{
         static bool Crs_Cmp(const Course*, const Course*);
         friend Student;
         friend TeacherUser;
+        friend AdminUser;
 
 };

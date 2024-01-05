@@ -2,6 +2,7 @@
 #include"Class.h"
 
 class Class;
+class AdminUser;
 
 class ClassManagement{
     private:
@@ -14,5 +15,6 @@ class ClassManagement{
         void Add_Class(Class*);
         static ClassManagement* ReturnUniqueObject();
         friend Class;
+        friend AdminUser;
 
 };

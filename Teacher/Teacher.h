@@ -47,4 +47,5 @@ class Teacher{
         friend Course;
         friend TeacherManagement;
         friend class TeacherUser;
+        friend class AdminUser;
 };

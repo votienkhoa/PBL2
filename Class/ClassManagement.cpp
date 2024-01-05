@@ -36,5 +36,4 @@ void ClassManagement::Classes_Display(){
         cout << setw(25) << left << x->Cls_Teacher->getName();
         cout << endl;
     }
-    getch();
 }

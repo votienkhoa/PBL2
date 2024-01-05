@@ -109,12 +109,15 @@ void Course::Set_Result(Student* x){
 }
 
 void Course::Show_Student(){
+    int i = 1;
+    cout << setw(8) << left << "STT";
     cout << setw(25) << left << "Ten hoc sinh";
     cout << setw(10) << left << "Diem TX";
     cout << setw(10) << left << "Diem GK";
     cout << setw(10) << left << "Diem CK";
     cout << endl << endl;
     for (auto x : Res_List){
+        cout << setw(8) << left << i; i++;
         cout << setw(25) << left << x.first->getName();
         cout << setw(10) << left << x.second.TX;
         cout << setw(10) << left << x.second.GK;
