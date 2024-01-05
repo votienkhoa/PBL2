@@ -46,6 +46,7 @@ class TeacherUser : public User{
         void Action_to_Course1(Course*);
         void Action_to_Course2(Course*);
         void Action_to_Stu(Student*, Course*);
+        void Action_to_Class(Class*);
         friend class AdminUser;
 };
 
@@ -57,11 +58,12 @@ class AdminUser : public User{ //Quan tri tat ca moi thu
         Teacher* getData();
         void UserAction();
         void Action_to_Stu(NormalUser*);
-        void Action_to_Stu1(Student*, Course*);
+        void Action_to_Stu_inCourse(Student*, Course*); //dung voi action to course
         void Action_to_Teacher(TeacherUser*);
         void Action_to_Admin(AdminUser*);
-        void Action_to_Course(Course*);
-        void Action_to_Course1(Course*);
-        void Action_to_Course2(Course*);
+        void Action_to_Course(Course*); //thao tac voi tu cach admin
+        void Action_to_Course1(Course*); //thao tac voi tu cach teacher
+        void Action_to_Course2(Course*);  //thao tac voi tu cach teacher
         void Action_to_Class(Class*);
+        void Action_to_Class1(Class*); //thao tac voi tu cach teacher
 };

@@ -10,18 +10,25 @@ Course::~Course(){
 
 }
 //----------------------------
-string Course::getName(){
+string Course::getName() const{
     return Crs_Name;
 }
-string Course::getID(){
+string Course::getID() const{
     return Crs_ID;
 }
-string Course::getTeacherName(){
+string Course::getTeacherName() const{
     return Crs_Teacher->getName();
+}
+string Course::getTeacherID() const{
+    return Crs_Teacher->getID();
 }
 int Course::getNumber(){
     return Res_List.size();
 }
+map<Student*,Result> Course::getResult() const{
+    return Res_List;
+}
+
 
 double Course::getTX(Student* x){
     return Res_List[x].TX;

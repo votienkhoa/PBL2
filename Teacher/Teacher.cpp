@@ -28,12 +28,20 @@ Teacher::~Teacher(){
 
 }
 //------------------------------------------------
-string Teacher::getName(){
+string Teacher::getName() const{
     return Tch_Name;
 }
-
-string Teacher::getID(){
+string Teacher::getID() const{
     return Tch_ID;
+}
+bool Teacher::getSex() const{
+    return Tch_Sex;
+}
+string Teacher::getBD() const{
+    return Tch_BD;
+}
+string Teacher::getAddress() const{
+    return Tch_Address;
 }
 
 Class* Teacher::getClass(){
@@ -111,6 +119,7 @@ void Teacher::Tch_Edit(){
             {
                 cout << "Ho va ten cu: " << this->Tch_Name << endl;
                 cout << "Ho va ten moi: ";
+                fflush(stdin);
                 string s; getline(cin, s);
                 this->Tch_Name = s;
                 break;
@@ -151,6 +160,7 @@ void Teacher::Tch_Edit(){
             {
                 cout << "Dia chi cu: " << this->Tch_Address << endl;
                 cout << "Dia chi moi: ";
+                fflush(stdin);
                 string s; getline(cin, s);
                 this->Tch_Address = s;
                 break;

@@ -67,7 +67,7 @@ Student* Stu_Create(){
     fflush(stdin); getline(cin, e);
     system("cls");
     cout << "Hay chon lop cua hoc sinh nay: "; cout << endl;
-    Class* f = Class_Select();
+    Class* f = Class_Select(ClassManagement::ReturnUniqueObject()->getClass_List());
     Student* tmp = new Student(a,"SV"+b,c2,d,e,f);
     f->Add_Student(tmp);
 
@@ -205,6 +205,22 @@ void Courses_Display(const vector<Course*> &v){
     }
 }
 //----------------------------------------------------------------
+void Classes_Display(const vector<Class*> &v){
+    cout << setw(8) << left << "STT";
+    cout << setw(15) << left << "Ten lop" ;
+    cout << setw(8) << left << "Si so";
+    cout << setw(25) << left << "GVCN" ;
+    cout << endl << endl;
+    int i = 1;
+    for (auto x : v){
+        cout << setw(8) << left << i; i++;
+        cout << setw(15) << left << x->getName();
+        cout << setw(8) << left << x->getNumber();
+        cout << setw(25) << left << x->getTeacherName();
+        cout << endl;
+    }
+}
+//----------------------------------------------------------------
 
 Student* Student_Select(const vector<Student*> &v){
     int wrin = 0;
@@ -225,7 +241,7 @@ Student* Student_Select(const vector<Student*> &v){
         else return v[choice-1];
     }
 }
-
+//-------------------------------------------------------
 Teacher* Teacher_Select(const vector<Teacher*> &v, bool status){
     int wrin = 0;
     string schoice;
@@ -247,7 +263,7 @@ Teacher* Teacher_Select(const vector<Teacher*> &v, bool status){
         else return v[choice-1];
     }
 }
-
+//----------------------------------------------------
 Course* Course_Select(const vector<Course*>& v){
     int wrin = 0;
     int choice;
@@ -268,15 +284,14 @@ Course* Course_Select(const vector<Course*>& v){
         else return v[choice-1];
     }
 }
-
-Class* Class_Select(){
+//--------------------------------------------------
+Class* Class_Select(const vector<Class*>& v){
     int wrin = 0;
     int choice;
     string schoice;
     while(1){
         system("cls");
-        ClassManagement* x =ClassManagement::ReturnUniqueObject();
-        x->Classes_Display();
+        Classes_Display(v);
 
         cout << endl;
         if (wrin == 1) cout << RED << "Lua chon khong hop le, vui long nhap lai!" <<  RESET << endl;
@@ -286,8 +301,8 @@ Class* Class_Select(){
         if (schoice == "") return nullptr;
         else choice = stoi(schoice);
 
-        if (choice < 1 || choice > x->getClass_List().size()) wrin = 1;
-        else return x->getClass_List()[choice-1];
+        if (choice < 1 || choice > v.size()) wrin = 1;
+        else return v[choice-1];
     }
 }
 
@@ -521,6 +536,38 @@ void saveStudent(){
     }
 }
 
+void saveTeacher(){
+    ofstream f("Database/Teacher.csv");
+    auto v = UserManagement::ReturnUniqueObject()->getUsers();
+    for (auto x : v){
+        if (TeacherUser* tmp = dynamic_cast<TeacherUser*>(x)){
+            f << tmp->getData()->getName() << ',';
+            f << tmp->getData()->getID() << ',';
+            f << (tmp->getData()->getSex() ? 1 : 0) << ',';
+            f << tmp->getData()->getBD() << ',';
+            f << tmp->getData()->getAddress() << ',';
+            f << tmp->getUsername() << ',';
+            f << tmp->getPassword() << endl;
+        }
+    }
+}
+
+void saveAdmin(){
+    ofstream f("Database/Admin.csv");
+    auto v = UserManagement::ReturnUniqueObject()->getUsers();
+    for (auto x : v){
+        if (AdminUser* tmp = dynamic_cast<AdminUser*>(x)){
+            f << tmp->getData()->getName() << ',';
+            f << tmp->getData()->getID() << ',';
+            f << (tmp->getData()->getSex() ? 1 : 0) << ',';
+            f << tmp->getData()->getBD() << ',';
+            f << tmp->getData()->getAddress() << ',';
+            f << tmp->getUsername() << ',';
+            f << tmp->getPassword() << endl;
+        }
+    }
+}
+
 void saveClass(){
     ofstream f("Database/Class.csv");
     auto v = ClassManagement::ReturnUniqueObject()->getClass_List();
@@ -530,12 +577,24 @@ void saveClass(){
         int sz = x->getCls_List().size();
         int i = 1;
         for (auto z : x->getCls_List()){
-            if (i == sz) f << z->getID() << endl;
+            if (i == sz) f << z->getID();
             else f << z->getID() << ',';
             i++;
         }
+        f << endl;
     }
 }
 
+void saveCourse(){
+    ofstream f("Database/Course.csv");
+    auto v = CourseManagement::ReturnUniqueObject()->getCourse_List();
+    for (auto x : v){
+        f << "Course," << x->getID() << ',' << x->getName() << ',' << x->getTeacherID() << endl;
+        for (auto z : x->getResult()){
+            f << "Student," << z.first->getID() << ',' << z.second.getTX() << ',' << z.second.getGK() << ',' << z.second.getCK() << endl;
+        }
+    }
+
+}
 
 

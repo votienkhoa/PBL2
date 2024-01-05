@@ -19,9 +19,11 @@ class Course{
     public:
         Course(string = "NULL", string = "NULL",Teacher* = nullptr);
         ~Course();
-        string getName();
-        string getID();
-        string getTeacherName();
+        string getName() const;
+        string getID() const;
+        string getTeacherName() const;
+        string getTeacherID() const;
+        map<Student*,Result> getResult() const;
         int getNumber();
         double getTX(Student*);
         double getGK(Student*);

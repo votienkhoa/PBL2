@@ -33,6 +33,7 @@ class Student{
         bool getSex() const;
         string getBD() const;
         string getAddress() const;
+        Class* getClass() const;
         NormalUser* getAccount();
         void setClass(Class*);
         void setAccount(NormalUser*);

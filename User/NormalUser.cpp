@@ -23,7 +23,8 @@ void NormalUser::UserAction(){
         cout << "5. Doi mat khau" << endl;
         cout << "6. Dang xuat" << endl;
 
-        int choice; cin >> choice;
+        char c = _getch();
+        int choice = c - '0';
         system("cls");
         switch (choice)
         {

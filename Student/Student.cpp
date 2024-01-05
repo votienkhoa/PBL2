@@ -32,7 +32,6 @@ Student::~Student(){
 string Student::getName() const{
     return Stu_Name;
 }
-
 string Student::getID() const{
     return Stu_ID;
 }
@@ -45,7 +44,9 @@ string Student::getBD() const{
 string Student::getAddress() const{
     return Stu_Address;
 }
-
+Class* Student::getClass() const{
+    return Stu_Class;
+}
 NormalUser* Student::getAccount(){
     return Stu_Account;
 }
@@ -121,16 +122,15 @@ void Student::Stu_Edit(){
             {
                 cout << "Ho va ten cu: " << this->Stu_Name << endl;
                 cout << "Ho va ten moi: ";
+                fflush(stdin);
                 string s; getline(cin, s);
                 this->Stu_Name = s;
                 break;
             }
             case 2:
             {
-                cout << "MSGV cu: " << this->Stu_ID << endl;
-                cout << "MSGV moi: ";
-                string s; getline(cin, s);
-                this->Stu_ID = s;
+                cout << RED << "Thong tin nay khong the chinh sua!" << RESET << endl;
+                getch();
                 break;
             }
             case 3:
@@ -144,27 +144,34 @@ void Student::Stu_Edit(){
             }
             case 4:
             {
-                cout << "Gioi tinh cu: " << (this->Stu_Sex ? "Nam" : "Nu") << endl;
-                cout << "1.Nu" << endl << "2.Nam" << endl;
-                cout << "Gioi tinh moi: ";
-                int b; cin >> b;
-                this->Stu_Sex = abs(b-1);
+                while(1){
+                    cout << "Gioi tinh cu: " << (Stu_Sex ? "Nam" : "Nu") << endl;
+                    cout << "1.Nu" << endl << "2.Nam" << endl;
+                    cout << "Gioi tinh moi: ";
+                    string b; cin >> b;
+                    if (b != "1" && b!="2"){
+                        system("cls");
+                        cout << RED << "Nhap sai! Vui long nhap lai!" << RESET << endl;
+                        continue;
+                    }
+                    Stu_Sex = abs(stoi(b)-1);
+                    break;
+                }
                 break;
             }
             case 5:
             {
                 cout << "Dia chi cu: " << this->Stu_Address << endl;
                 cout << "Dia chi moi: ";
+                fflush(stdin);
                 string s; getline(cin, s);
                 this->Stu_Address = s;
                 break;
             }
             case 6:
             {
-                cout << "Lop cu: " << this->Stu_Class->getName() << endl;
-                cout << "Nhan phim bat ki de hien thi danh sach lop: "; _getch();
-                Class* tmp = Class_Select();  
-                this->Stu_Class = tmp;
+                cout << RED << "Thong tin nay khong the chinh sua!" << RESET << endl;
+                getch();
                 break;
             }
             case 7:

@@ -8,3 +8,15 @@ Result::Result()
 Result::~Result(){
 
 }
+
+double Result::getTX() const{
+    return TX;
+}
+
+double Result::getGK() const{
+    return GK;
+}
+
+double Result::getCK() const{
+    return CK;
+}

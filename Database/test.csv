@@ -1,9 +1,6 @@
-Vo Tien Khoa,SV102220028,1,24/5/2004,K76/5F Thanh Son,khoa1,khoa1
-Tran Duc Huy,SV102220023,1,15/12/2004,Le Loi,huy,1,
-Hoang Duc Manh,SV102220029,1,7/5/2004,Da Nang,manh1,1
-Nguyen Duc Hoai Vu,SV080920041,1,8/9/2004,54 Nguyễn Lương Bằng,vu,1
-Phan Thanh Sum,SV102220039,1,18/4/2004,"Liên Chiểu",sum,1
-Ngo Nguyen Tan Quan,SV102220033,1,14/3/2004,"Sơn Trà, Đà Nẵng",quan,1
-Nguyen Quoc Anh,SV193728198,1,21/12/2004,"Hoà Khánh Bắc Liên Chiểu Đà Nẵng",anh,1
-Phan Thi Diu Hien,SV102220015,0,1/7/2004,"K42/1 Ngô Sĩ Liên, phường Hoà Khánh Bắc, Liên Chiểu, Đà Nẵng",hien,1
-Le Hai Khoa,SV102220026,1,23/12/2004,Đà Nẵng,khoaa,1
+Course,HP00000001,PBL1,GV10101010
+Student,SV102220029,10,9,9.5
+Student,SV102220026,10,9,9.5
+Course,HP00000002,Lap trinh huong doi tuong,GV12121212
+Student,SV102220028,10,9,9.5
+Student,SV102220023,10,9.5,9

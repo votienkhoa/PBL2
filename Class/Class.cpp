@@ -14,7 +14,7 @@ Class::~Class(){
 
 }
 //-------------------------------
-vector<Student*> Class::getCls_List(){
+vector<Student*>& Class::getCls_List(){
     return Cls_List;
 }
 
@@ -24,6 +24,18 @@ string Class::getName() const{
 
 string Class::getTeacherID() const{
     return Cls_Teacher->getID();
+}
+
+string Class::getTeacherName() const{
+    return Cls_Teacher->getName();
+}
+
+int Class::getNumber() const{
+    return Cls_List.size();
+}
+
+void Class::setName(string a){
+    Cls_Name = a;
 }
 //-------------------------------
 void Class::Class_Info(){

@@ -29,7 +29,8 @@ void AdminUser::Action_to_Stu(NormalUser* x){
         cout << "7. Xoa tai khoan cua sinh vien nay" << endl;
         cout << "8. Tro ve" << endl;
 
-        int choice; cin >> choice;
+        char c = _getch();
+        int choice = c - '0';
         system("cls");
         switch (choice)
         {
@@ -277,7 +278,7 @@ void AdminUser::Action_to_Course(Course* x){
     
 }
 //-----------------------------------------------
-void AdminUser::Action_to_Stu1(Student* x, Course* y){
+void AdminUser::Action_to_Stu_inCourse(Student* x, Course* y){
     while(1){
         bool exit = 0;
         system("cls");
@@ -349,7 +350,7 @@ void AdminUser::Action_to_Course1(Course* x){
             int i = 1;
             for (auto z : x->Res_List){
                 if (i == choice){
-                    Action_to_Stu1(z.first, x);
+                    Action_to_Stu_inCourse(z.first, x);
                     break;
                 }
                 i++;
@@ -360,6 +361,7 @@ void AdminUser::Action_to_Course1(Course* x){
 //-----------------------------------------------
 void AdminUser::Action_to_Course2(Course* x){
     while(1){
+        system("cls");
         Student* tmp = Student_Select(StudentManagement::ReturnUniqueObject()->getStudent_List());
         if (tmp == nullptr) return;
 
@@ -405,8 +407,12 @@ void AdminUser::Action_to_Class(Class* x){
             }
             case 2:
             {
-                cout << "chua code";
-                getch();
+                cout << "Ten lop cu: " << x->getName() << endl;
+                cout << "Ten lop moi: ";
+                string a; 
+                fflush(stdin); getline(cin,a);
+                if (a == "") break;
+                else x->setName(a);
                 break;
             }
             case 3:
@@ -429,6 +435,92 @@ void AdminUser::Action_to_Class(Class* x){
         if (Logout) break;
     }
 }
+//----------------------------------------------------------------
+void AdminUser::Action_to_Class1(Class* x){
+    while(1){
+        bool Logout = false;
+        system("cls");
+        cout << "1. Xem thong tin lop sinh hoat" << endl;
+        cout << "2. Xem danh sach sinh vien cua lop" << endl;
+        cout << "3. Them sinh vien vao lop" << endl;
+        cout << "4. Xoa sinh vien khoi lop" << endl;
+        cout << "5. Tro ve" << endl;
+
+        char c = _getch();
+        int choice = c-'0';
+        system("cls");
+        switch (choice)
+        {
+        case 1:
+        {
+            x->Class_Info();
+            getch();
+            break;
+        }
+        case 2:
+        {
+            Students_Display(x->getCls_List());
+            getch();
+            break;
+        }
+        case 3:
+        {  
+            while(1){
+                system("cls");
+                cout << CYN << "Hay chon sinh vien de them vao lop!" << RESET << endl;
+                Student* tmp = Student_Select(StudentManagement::ReturnUniqueObject()->getStudent_List());
+                if (tmp == nullptr) break;
+                bool breaker = 1;
+                //neu sinh vien da co lop
+                if (tmp->getClass() != nullptr){
+                    system("cls");
+                    cout << RED << "Sinh vien da co lop! Vui long chon lai!" << RESET << endl;
+                    getch();
+                    continue;
+                }
+                x->Add_Student(tmp);
+                system("cls");
+                cout << GRN << "Them sinh vien thanh cong!" << RESET << endl;
+                getch();
+                break;
+            }
+            break;
+        }
+        case 4:
+        {
+            auto v = x->getCls_List();
+            Student* tmp = Student_Select(x->getCls_List());
+            if (tmp == nullptr) break;
+
+            while(1){
+                system("cls");
+                cout << RED << "Ban co chac chan muon xoa sinh vien nay khoi lop?" << RESET << endl;
+                cout << "1.Xoa sinh vien nay" << endl;
+                cout << "2.Tro ve" << endl;
+                char c = _getch();
+                if (c!='1' && c!='2') continue;
+                else{
+                    if (c=='1'){
+                        x->getCls_List().erase(lower_bound(x->getCls_List().begin(), x->getCls_List().end(),tmp,Student::Stu_Cmp));
+                        cout << GRN << "Da xoa sinh vien thanh cong!" << RESET << endl;
+                        getch();
+                        break;
+                    }
+                    else break;
+                }
+            }
+            break;
+        }
+        case 5:
+        {
+            Logout = true;
+            break;
+        }
+        
+        }
+        if (Logout) break;
+    }
+}
 //------------------------------------------------------------------------
 
 
@@ -439,12 +531,13 @@ void AdminUser::UserAction(){
         system("cls");
         cout << "1. Xem thong tin ca nhan" << endl;
         cout << "2. Chinh sua thong tin ca nhan" << endl;
-        cout << "3. Tao tai khoan moi" << endl;
-        cout << "4. Tao lop sinh hoat" << endl;
-        cout << "5. Tao lop hoc phan" << endl;
-        cout << "6. Xem cac danh sach" << endl;
-        cout << "7. Doi mat khau" << endl;
-        cout << "8. Dang xuat" << endl;
+        cout << "3. Thao tac voi lop chu nhiem" << endl;
+        cout << "4. Tao tai khoan moi" << endl;
+        cout << "5. Tao lop sinh hoat" << endl;
+        cout << "6. Tao lop hoc phan" << endl;
+        cout << "7. Xem cac danh sach" << endl;
+        cout << "8. Doi mat khau" << endl;
+        cout << "9. Dang xuat" << endl;
 
         char c = _getch();
         int choice = c - '0';
@@ -464,6 +557,16 @@ void AdminUser::UserAction(){
             }
             case 3:
             {
+                if (data->Tch_Class) Action_to_Class1(data->Tch_Class);
+                else{
+                    system("cls");
+                    cout << RED << "Giao vien nay chua chu nhiem lop nao!" << RESET << endl;
+                    getch();
+                }
+                break;
+            }
+            case 4:
+            {
                 while(1){
                     system("cls");
                     cout << "1. Tao tai khoan cho hoc sinh" << endl;
@@ -479,26 +582,25 @@ void AdminUser::UserAction(){
                 }
                 break;
             }
-            case 4:
+            case 5:
             {
                 Class_Create();
                 break;
             }
-            case 5:
+            case 6:
             {
                 Course_Create();
                 break;
             }
-            case 6:
+            case 7:
             {
                 while(1){
                     system("cls");
                     cout << "1. Xem danh sach sinh vien toan truong" << endl;
                     cout << "2. Xem danh sach giao vien toan truong" << endl;
-                    cout << "3. Xem danh sach cac lop hoc" << endl;
-                    cout << "4. Xem danh sach cac lop hoc phan" << endl;
-                    cout << "5. Xem danh sach sinh vien cua lop chu nhiem" << endl;
-                    cout << "6. Xem danh sach cac lop hoc phan dang dam nhiem" << endl;
+                    cout << "3. Xem danh sach tat ca lop sinh hoat" << endl;
+                    cout << "4. Xem danh sach tat ca lop hoc phan" << endl;
+                    cout << "5. Xem danh sach lop hoc phan dang dam nhiem" << endl;
                     char c2 = _getch();
                     int choice = c2 - '0';
                     system("cls");
@@ -519,7 +621,7 @@ void AdminUser::UserAction(){
                     }
                     else if (choice == 3){
                         while(1){
-                            Class* tmp = Class_Select();
+                            Class* tmp = Class_Select(ClassManagement::ReturnUniqueObject()->getClass_List());
                             if (tmp == nullptr) break;
                             else Action_to_Class(tmp);
                         }
@@ -532,10 +634,6 @@ void AdminUser::UserAction(){
                         }
                     }
                     else if (choice == 5){
-                        cout << "chua code";
-                        getch();
-                    }
-                    else if (choice == 6){
                         if (data->Tch_Courses.size() == 0){
                             cout << RED << "Giao vien nay chua dam nhiem lop hoc phan nao" << RESET << endl;
                             getch();
@@ -567,12 +665,12 @@ void AdminUser::UserAction(){
                 }
                 break;
             }
-            case 7:
+            case 8:
             {
                 ChangePassword();
                 break;
             }
-            case 8:
+            case 9:
             {
                 Logout = true;
             }
