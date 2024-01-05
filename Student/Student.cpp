@@ -83,12 +83,14 @@ void Student::Stu_Display2(){
 }
 
 void Student::Courses_Display(){
+    cout << setw(15) << left << "Ma HP";
     cout << setw(35) << left << "Ten lop hoc phan";
     cout << setw(10) << left << "Diem TX";
     cout << setw(10) << left << "Diem GK";
     cout << setw(10) << left << "Diem CK";
     cout << endl;
     for (auto x : Stu_Courses){
+        cout << setw(15) << left << x->getID();
         cout << setw(35) << left << x->getName();
         cout << setw(10) << left << x->getTX(this);
         cout << setw(10) << left << x->getGK(this);

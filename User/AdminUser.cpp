@@ -211,6 +211,55 @@ void AdminUser::Action_to_Admin(AdminUser* x){
         if (Logout) break;
     }
 }
+
+void AdminUser::Action_to_Course(Course* x){
+    while (1)
+    {
+        bool Logout = false;
+        system("cls");
+        cout << "1. Xem thong tin lop hoc phan" << endl;
+        cout << "2. Chinh sua ten lop hoc phan" << endl;
+        cout << "3. Xem danh sach sinh vien lop nay" << endl;
+        cout << "4. Xoa lop hoc phan nay" << endl;
+        cout << "5. Thoat" << endl;
+
+        char c = _getch();
+        int choice = c - '0';
+        system("cls");
+        switch (choice)
+        {
+            case 1:
+            {
+                x->Course_Info();
+                getch();
+                break;
+            }
+            case 2:
+            {
+                cout << "chua code";
+                break;
+            }
+            case 3:
+            {
+                x->Show_Student();
+                getch();
+                break;
+            }
+            case 4:
+            {
+                x->Course_Delete();
+                return;
+            }
+            case 5:
+            {
+                Logout = true;
+            }
+        }
+
+        if (Logout) break;
+    }
+    
+}
 //------------------------------------------------------------------------
 
 
@@ -299,8 +348,11 @@ void AdminUser::UserAction(){
                     }
                     else if (choice == 3) ClassManagement::ReturnUniqueObject()->Classes_Display();
                     else if (choice == 4){
-                        Courses_Display(CourseManagement::ReturnUniqueObject()->getCourse_List());
-                        getch();
+                        while(1){
+                            Course* tmp =Course_Select(CourseManagement::ReturnUniqueObject()->getCourse_List());
+                            if (tmp) Action_to_Course(tmp);
+                            else break;
+                        }
                     }
                     else if (c2 == 13) break;
                 }

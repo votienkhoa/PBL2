@@ -237,14 +237,29 @@ Class* Class_Select(){
 }
 
 void Class_Create(){
-    string a; 
-    cout << "Hay nhap ten lop hoc: "; cin >> a;
+    string a;
+    while(1){
+        bool breaker = 1;
+        cout << "Hay nhap ten lop hoc: ";
+        fflush(stdin);
+        getline(cin,a);
+        if (a == "") return;
+        for (auto x : ClassManagement::ReturnUniqueObject()->getClass_List()){
+            if (x->getName() == a){
+                system("cls");
+                cout << RED << "Ten lop da ton tai! Vui long chon ten khac!" << RESET << endl;
+                breaker = 0;
+                break;
+            }
+        }
+        if (breaker) break;
+    }
     system("cls");
     cout << "Chon giao vien chu nhiem "; cout << endl;
     Teacher* b = Teacher_Select(TeacherManagement::ReturnUniqueObject()->getTeacher_List(),1);
+    if (b == nullptr) return;
     
     Class* tmp = new Class(a,b);
-    ClassManagement::ReturnUniqueObject()->Add_Class(tmp);
 
     system("cls");
     cout << GRN << "Tao lop thanh cong!" << RESET; getch();

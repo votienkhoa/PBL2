@@ -28,7 +28,8 @@ void TeacherUser::Action_to_Stu(Student* x, Course* y){
         {
         case 1:
         {
-            x->Stu_Display2();
+            x->Stu_Display1();
+            getch();
             break;
         }
         case 2:
@@ -98,7 +99,7 @@ void TeacherUser::UserAction(){
         system("cls");
         cout << "1. Xem thong tin ca nhan" << endl;
         cout << "2. Chinh sua thong tin ca nhan" << endl;
-        cout << "3. Xem danh sach sinh vien toan truong" << endl;
+        cout << "3. Xem danh sach sinh vien cua lop chu nhiem" << endl;
         cout << "4. Xem danh sach lop hoc phan dang dam nhiem" << endl;
         cout << "5. Doi mat khau" << endl;
         cout << "6. Dang xuat" << endl;
@@ -121,12 +122,17 @@ void TeacherUser::UserAction(){
             }
             case 3:
             {
-                Students_Display(StudentManagement::ReturnUniqueObject()->getStudent_List());
+                data->getClass()->Show_Student();
                 system("pause");
                 break;
             }
             case 4:
             {
+                if (data->Tch_Courses.size() == 0){
+                    cout << RED << "Giao vien nay chua dam nhiem lop hoc phan nao" << RESET << endl;
+                    getch();
+                    break;
+                }
                 while(1){
                     system("cls");
                     Course* tmp = Course_Select(data->Tch_Courses);

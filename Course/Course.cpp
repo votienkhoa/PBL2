@@ -122,6 +122,13 @@ void Course::Show_Student(){
         cout << endl;
     }
 }
+
+void Course::Course_Info(){
+    cout << "1.Ten lop hoc phan: " << Crs_Name << endl;
+    cout << "2.Ma HP: " << Crs_ID << endl;
+    cout << "3.Giang vien: " << Crs_Teacher->getName() << endl;
+    cout << "4.Si so: " << Res_List.size();
+}
 //-----------------------------------------------
 bool Course::Crs_Cmp(const Course* a, const Course* b){
     return a->Crs_ID < b->Crs_ID;
@@ -135,4 +142,8 @@ void Course::Course_Delete(){
         auto tmp = &x.first->Stu_Courses;
         tmp->erase(lower_bound(tmp->begin(), tmp->end(), this, Crs_Cmp));
     }
+
+    auto tc = &Crs_Teacher->Tch_Courses;
+
+    tc->erase(lower_bound(tc->begin(), tc->end(),this,Course::Crs_Cmp));
 }

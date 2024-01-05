@@ -20,6 +20,7 @@ int main(){
         else{
             saveStudent();
             saveClass();
+            break;
         }
     }
 }

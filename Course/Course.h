@@ -31,6 +31,7 @@ class Course{
         void setCK(Student*,double);
         void Add_Student(Student*);
         void Set_Result(Student*);
+        void Course_Info();
         void Show_Student();
         void Course_Delete();
         static bool Crs_Cmp(const Course*, const Course*);

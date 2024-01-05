@@ -49,5 +49,7 @@ void Class::Cls_Delete(){
     for (auto x : Cls_List){
         x->setClass(nullptr);
     }
+
+    Cls_Teacher->setClass(nullptr);
 }
 
