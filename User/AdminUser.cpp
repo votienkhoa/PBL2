@@ -253,7 +253,8 @@ void AdminUser::Action_to_Course(Course* x){
             }
             case 2:
             {
-                cout << "chua code";
+                cout << RED << "Thong tin nay khong the chinh sua!" << RESET << endl;
+                getch();
                 break;
             }
             case 3:
@@ -264,8 +265,17 @@ void AdminUser::Action_to_Course(Course* x){
             }
             case 4:
             {
-                x->Course_Delete();
-                return;
+                cout << RED << "Ban co chac chan muon xoa lop HP nay?" << RESET << endl;
+                cout << RED << "Luu y: Khi xoa lop HP nay thi moi ket qua cua sinh vien thuoc lop HP nay se bi xoa va khong the khoi phuc!" << RESET << endl;
+                cout << "1. Xoa lop HP nay" << endl;
+                cout << "2. Tro ve" << endl;
+                char c = _getch();
+                int choice = c - '0';
+                if (choice == 1){
+                    x->Course_Delete();
+                    return;
+                }
+                break;
             }
             case 5:
             {
@@ -313,6 +323,8 @@ void AdminUser::Action_to_Stu_inCourse(Student* x, Course* y){
             int choice = c - '0';
             if (choice == 1){
                 y->Res_List.erase(x);
+                auto tmp = &x->Stu_Courses;
+                tmp->erase(lower_bound(tmp->begin(),tmp->end(),y,Course::Crs_Cmp));y->Res_List.erase(x);
                 return;
             }
             break;

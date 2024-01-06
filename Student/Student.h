@@ -12,6 +12,8 @@ class StudentManagement;
 class Course;
 class UserManagement;
 class NormalUser;
+class TeacherUser;
+class AdminUser;
 
 
 class Student{
@@ -48,7 +50,8 @@ class Student{
         friend class StudentManagement;
         friend class UserManagement;
         friend class Course;
-        // friend void Students_Display(vector<Student*>);
+        friend class TeacherUser;
+        friend class AdminUser;
 };
 
 

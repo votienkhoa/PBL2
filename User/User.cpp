@@ -52,8 +52,9 @@ void User::ChangePassword(){
     }
 }
 
-void User::UserAction(){
-    cout << "an cut" << endl;
+void User::UserAction()
+{
+    
 }
 
 void Action(User* x){

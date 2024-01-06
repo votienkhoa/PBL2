@@ -47,6 +47,8 @@ void TeacherUser::Action_to_Stu(Student* x, Course* y){
             int choice = c - '0';
             if (choice == 1){
                 y->Res_List.erase(x);
+                auto tmp = &x->Stu_Courses;
+                tmp->erase(lower_bound(tmp->begin(),tmp->end(),y,Course::Crs_Cmp));
                 return;
             }
             break;
@@ -181,6 +183,7 @@ void TeacherUser::Action_to_Class(Class* x){
                 else{
                     if (c=='1'){
                         x->getCls_List().erase(lower_bound(x->getCls_List().begin(), x->getCls_List().end(),tmp,Student::Stu_Cmp));
+                        // tmp->Stu_Courses.erase(lower_bound(tmp->Stu_Courses.begin(),tmp->Stu_Courses.end(),x))
                         cout << GRN << "Da xoa sinh vien thanh cong!" << RESET << endl;
                         getch();
                         break;
@@ -253,7 +256,7 @@ void TeacherUser::UserAction(){
                         while(1){
                             system("cls");
                             cout << "1. Them sinh vien vao lop" << endl;
-                            cout << "2. Xem sinh vien cua lop " << endl;
+                            cout << "2. Xem va thao tac voi sinh vien cua lop " << endl;
                             cout << "3. Tro ve" << endl;
                             char c = _getch();
 

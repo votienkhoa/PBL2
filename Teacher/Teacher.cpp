@@ -66,7 +66,7 @@ void Teacher::setClass(Class* x){
 }
 
 void Teacher::setAccount(User* x){
-    if (AdminUser* tmp = dynamic_cast<AdminUser*>(x)){
+    if (AdminUser* tmp = dynamic_cast<AdminUser*>(x)){ 
         Tch_Account2 = tmp;
     }
     else{
@@ -208,8 +208,6 @@ void Teacher::Tch_Delete(){
                 break;
             }
         }
-
-
         current_index++;
     }
     usptr->getUsers().erase(usptr->getUsers().begin() + rm_index);
